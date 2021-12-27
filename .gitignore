@@ -1,0 +1,940 @@
+
+Unemployment/unemployment.R
+Unemployment/figs/unemployment2.pdf
+Unemployment/data/unemp.txt
+Unemployment/data/.unemployment_simple.dat.icloud
+Unemployment/data/.unemployment.long.dat.icloud
+Unemployment/data/.unemployment.dat.icloud
+Unemployment/.unemployment.Rmd.icloud
+Unemployment/.DS_Store
+Student/student.R
+Student/figs/student_fit3_R2.pdf
+Student/figs/student_fit3_mcmc_areas.pdf
+Student/figs/student_fit2_R2.pdf
+Student/figs/student_fit2_mcmc_areas.pdf
+Student/figs/student_fit1_R2.pdf
+Student/figs/student_fit1_mcmc_areas.pdf
+Student/figs/student_fit0_mcmc_areas.pdf
+Student/data/student_setup.R
+Student/data/student.txt
+Student/data/student-merge.R
+Student/data/readme.txt
+Student/data/.student-por.csv.icloud
+Student/data/.student-merged.csv.icloud
+Student/data/.student-mat.csv.icloud
+Student/.student.Rmd.icloud
+Student/.DS_Store
+Storable/test.R
+Storable/storable_old.R
+Storable/storable.R
+Storable/pictures.R
+Storable/figs/sampledata4.pdf
+Storable/data/.estimated.cutpoints.and.error.rates.6playergames.csv.icloud
+Storable/data/.estimated.cutpoints.and.error.rates.3playergames.csv.icloud
+Storable/data/.estimated.cutpoints.and.error.rates.2playergames.csv.icloud
+Storable/data/.6playergames.csv.icloud
+Storable/data/.3playergames.csv.icloud
+Storable/data/.2playergames.csv.icloud
+Storable/.storable.Rmd.icloud
+Storable/.pictures.Rmd.icloud
+Storable/.DS_Store
+Stents/stents_shift_1.pdf
+Stents/stents.R
+Stents/.stents.Rmd.icloud
+Simplest/simplest_lm.R
+Simplest/simplest.R
+Simplest/figs/simplest_1.pdf
+Simplest/figs/simple.pdf
+Simplest/.simplest_lm.Rmd.icloud
+Simplest/.simplest.Rmd.icloud
+SimpleCausal/figs/overview_3.pdf
+SimpleCausal/figs/overview_2b.pdf
+SimpleCausal/figs/overview_2a.pdf
+SimpleCausal/figs/overview_2.pdf
+SimpleCausal/figs/overview_1c.pdf
+SimpleCausal/figs/overview_1b.pdf
+SimpleCausal/figs/overview_1a.pdf
+SimpleCausal/causal.R
+SimpleCausal/.SimpleCausal.Rmd.icloud
+SimpleCausal/.causal.Rmd.icloud
+SexRatio/sexratio.R
+SexRatio/figs/sexratio_bayes_2.pdf
+SexRatio/figs/sexratio_bayes_1.pdf
+SexRatio/data/.sexratio.rda.icloud
+SexRatio/.sexratio.Rmd.icloud
+SexRatio/.DS_Store
+Sesame/sesame.R
+Sesame/data/sesame_setup.R
+Sesame/data/sesame_codebook.txt
+Sesame/data/.sesame_raw.dta.icloud
+Sesame/data/.sesame.csv.icloud
+Sesame/.sesame.Rmd.icloud
+Scalability/scalability.R
+Scalability/.scalability.Rmd.icloud
+SampleSize/simulation.R
+SampleSize/.simulation.Rmd.icloud
+Rsquared/rsquared.R
+Rsquared/.rsquared.Rmd.icloud
+Rodents/read_subset.R
+Rodents/hvs02_clean.R
+Rodents/Data Dictionary.txt
+Rodents/.rodents.doc.icloud
+Rodents/.rodents.dat.icloud
+Rodents/.hvs02_unsorted.csv.icloud
+Rodents/.hvs02_sorted.csv.icloud
+Rodents/.dist.dat.icloud
+Rodents/.bldg.subset.dat.icloud
+Rodents/.bldg.dat.icloud
+Rodents/.apt_keep.dat.icloud
+Rodents/.apt_all.dat.icloud
+Rodents/.apt.subset.dat.icloud
+Rodents/.apt.dat.icloud
+Roaches/roaches.R
+Roaches/readme.txt
+Roaches/figs/roaches_ppc_3.pdf
+Roaches/figs/roaches_ppc_12.pdf
+Roaches/data/.roaches.csv.icloud
+Roaches/.roaches.Rmd.icloud
+Roaches/.DS_Store
+RiskyBehavior/risky.R
+RiskyBehavior/data/.risky.csv.icloud
+RiskyBehavior/.risky.Rmd.icloud
+Restaurant/restaurant.R
+Restaurant/.restaurant.stan.icloud
+Restaurant/.restaurant.Rmd.icloud
+Residuals/residuals.R
+Residuals/figs/resid_0c.pdf
+Residuals/figs/resid_0b.pdf
+Residuals/figs/resid_0a.pdf
+Residuals/.residuals.Rmd.icloud
+Regression and Other Stories.Rproj
+Redistricting/redistrict.pdf
+Redistricting/.redistrict.ps.icloud
+raos_overview.pdf
+Pyth/pyth.txt
+ProbabilitySimulation/probsim.R
+ProbabilitySimulation/.probsim.Rmd.icloud
+Poststrat/poststrat2.R
+Poststrat/poststrat.R
+Poststrat/data/simulate_fake_data.R
+Poststrat/data/.poll.csv.icloud
+Poststrat/.poststrat2.Rmd.icloud
+Poststrat/.poststrat.Rmd.icloud
+Pollution/pollution.R
+Pollution/data/pollution.txt
+Pollution/data/.pollution.dta.icloud
+Pollution/data/.pollution.csv.icloud
+Pollution/.pollution.Rmd.icloud
+PoissonExample/poisson_regression.R
+PoissonExample/.poisson_regression.Rmd.icloud
+Pew/pew.R
+Pew/figs/pidideology.png
+Pew/figs/pid.pdf
+Pew/figs/ideology.pdf
+Pew/data/.pew_research_center_june_elect_wknd_data.dta.icloud
+Pew/.pew.Rmd.icloud
+Pew/.DS_Store
+PearsonLee/heights.R
+PearsonLee/figs/PearsonLee4b.pdf
+PearsonLee/figs/PearsonLee4a.pdf
+PearsonLee/figs/PearsonLee3b.pdf
+PearsonLee/figs/PearsonLee3a.pdf
+PearsonLee/figs/PearsonLee2.pdf
+PearsonLee/figs/PearsonLee1.pdf
+PearsonLee/figs/.PearsonLee1903.pdf.icloud
+PearsonLee/data/PearsonLee_setup_data.R
+PearsonLee/data/PearsonLee.txt
+PearsonLee/data/MotherDaughterHeights.txt
+PearsonLee/data/Heights.txt
+PearsonLee/.PearsonLee.Rmd.icloud
+PearsonLee/.heights.Rmd.icloud
+PearsonLee/.DS_Store
+Peacekeeping/peace.R
+Peacekeeping/figs/pk_pkept_codebook.pdf
+Peacekeeping/figs/peacekeeping_3.pdf
+Peacekeeping/figs/peacekeeping_2.pdf
+Peacekeeping/figs/peacekeeping_1.pdf
+Peacekeeping/data/.pk&pkept_old.dta.icloud
+Peacekeeping/data/.pk&pkept.dta.icloud
+Peacekeeping/data/.minidata.csv.icloud
+Peacekeeping/.peace.Rmd.icloud
+Peacekeeping/.minidata.csv.icloud
+Peacekeeping/.DS_Store
+Parabola/parabola.R
+Parabola/.parabola.stan.icloud
+Parabola/.parabola.Rmd.icloud
+Newcomb/newcomb.R
+Newcomb/figs/newcomb_rep_hist.pdf
+Newcomb/figs/newcomb_ppc_stat.pdf
+Newcomb/figs/newcomb_ppc_hist.pdf
+Newcomb/figs/newcomb_ppc_dens_overlay.pdf
+Newcomb/figs/newcomb_hist.pdf
+Newcomb/data/newcomb.txt
+Newcomb/.newcomb.Rmd.icloud
+Newcomb/.DS_Store
+NES/nes_logistic.R
+NES/nes_linear.R
+NES/figs/separation_compare.pdf
+NES/figs/partyid_1.pdf
+NES/figs/incomeseries.pdf
+NES/figs/income1b.pdf
+NES/figs/income1a.pdf
+NES/data/nes_setup.R
+NES/data/.nes5200_processed_voters_realideo.dta.icloud
+NES/data/.nes.txt.icloud
+NES/data/.nes.rda.icloud
+NES/.nes_logistic.Rmd.icloud
+NES/.nes_linear.Rmd.icloud
+NES/.DS_Store
+Names/names.R
+Names/lastletters.R
+Names/figs/namestimeboys2.pdf
+Names/figs/namestimeboys.pdf
+Names/figs/girls2010.pdf
+Names/figs/girls1950.pdf
+Names/figs/girls1900.pdf
+Names/figs/boys2010.pdf
+Names/figs/boys1950.pdf
+Names/figs/boys1900.pdf
+Names/data/.SSA-longtail-names.csv.icloud
+Names/data/.ErrorNames.csv.icloud
+Names/.names.Rmd.icloud
+Names/.lastletters.Rmd.icloud
+Names/.DS_Store
+Mile/mile.R
+Mile/figs/aplusbx3.pdf
+Mile/figs/aplusbx2b.pdf
+Mile/figs/aplusbx2a.pdf
+Mile/figs/aplusbx1b.pdf
+Mile/figs/aplusbx1a.pdf
+Mile/data/mile2.txt
+Mile/data/makecsv.R
+Mile/data/.mile.csv.icloud
+Mile/.mile.Rmd.icloud
+Mile/.DS_Store
+Metabolic/metabolic.R
+Metabolic/figs/metabolic2b.pdf
+Metabolic/figs/metabolic2a.pdf
+Metabolic/.metabolic.Rmd.icloud
+Mesquite/mesquite.R
+Mesquite/figs/mesquite_scatter.pdf
+Mesquite/figs/mesquite_ppc.pdf
+Mesquite/figs/mesquite_areas.pdf
+Mesquite/data/.mesquite.dat.icloud
+Mesquite/.mesquite.Rmd.icloud
+Mesquite/.DS_Store
+LowBwt/data/lowbwtd.txt
+LowBwt/data/lowbwt.txt
+LowBwt/data/.lowbwt.dat.icloud
+LogitGraphs/logitgraphs.R
+LogitGraphs/.logitgraphs.Rmd.icloud
+LogisticPriors/logistic_priors.R
+LogisticPriors/.logistic_priors.Rmd.icloud
+Lalonde/NSW_codebook.txt
+Lalonde/.NSW_dw_obs.dta.icloud
+KidIQ/kidiq_R2.R
+KidIQ/kidiq_loo.R
+KidIQ/kidiq_kcv.R
+KidIQ/kidiq.R
+KidIQ/kid.iq.ch4.R
+KidIQ/figs/kidiq.betasim2.pdf
+KidIQ/data/.kidiq.rda.icloud
+KidIQ/data/.kidiq.dta.icloud
+KidIQ/data/.kidiq.csv.icloud
+KidIQ/.kidiq_R2.Rmd.icloud
+KidIQ/.kidiq_loo.Rmd.icloud
+KidIQ/.kidiq_kcv.Rmd.icloud
+KidIQ/.kidiq.Rmd.icloud
+KidIQ/.DS_Store
+Introclass/residual_plots.R
+Introclass/data/.gradesW4315.dat.icloud
+Introclass/.residual_plots.Rmd.icloud
+Introclass/.fakeresid.Rmd.icloud
+Interactions/interactions.R
+Interactions/figs/interactions_male.pdf
+Interactions/figs/.interactions.ps.icloud
+Interactions/figs/.interactions.male.ps.icloud
+Interactions/figs/.interactions.female.ps.icloud
+Interactions/.interactions.Rmd.icloud
+Influence/influence.R
+Influence/.influence.Rmd.icloud
+index.R
+Imputation/imputation_gg.R
+Imputation/imputation.R
+Imputation/figs/siswave3_codebook_v33.pdf
+Imputation/figs/impute_scat_2.pdf
+Imputation/figs/impute_scat_1.pdf
+Imputation/figs/impute_hist4.pdf
+Imputation/figs/impute_hist3.pdf
+Imputation/figs/impute_hist2.pdf
+Imputation/data/siswave3_codebook_v33.pdf
+Imputation/data/imputation_setup.R
+Imputation/data/code.txt
+Imputation/data/.siswave3v4impute3.csv.icloud
+Imputation/.imputation_gg.Rmd.icloud
+Imputation/.imputation.Rmd.icloud
+Imputation/.DS_Store
+Helicopters/helicopters.R
+Helicopters/data/helicopters.txt
+Helicopters/.helicopters.Rmd.icloud
+HealthExpenditure/healthexpenditure.R
+HealthExpenditure/data/.lifeexpectancy.csv.icloud
+HealthExpenditure/data/.healthexpenditure.csv.icloud
+HealthExpenditure/data/.doctorvisits.csv.icloud
+HealthExpenditure/.healthexpenditure.Rmd.icloud
+HDI/hdi.R
+HDI/data/.state vote and income, 68-00.dta.icloud
+HDI/data/.hdi.dat.icloud
+HDI/.hdi.Rmd.icloud
+Golf/golf.R
+Golf/figs/golf3.pdf
+Golf/figs/golf2a.pdf
+Golf/figs/golf2.pdf
+Golf/figs/golf1.pdf
+Golf/figs/golf0.pdf
+Golf/data/golf.txt
+Golf/.golf_trig.stan.icloud
+Golf/.golf_logistic.stan.icloud
+Golf/.golf.Rmd.icloud
+Golf/.DS_Store
+Girls/.girls.dat.icloud
+Gay/gay_simple.R
+Gay/gay.R
+Gay/figs/gay9.pdf
+Gay/figs/gay8.pdf
+Gay/figs/gay7.pdf
+Gay/figs/gay6.pdf
+Gay/figs/gay5.pdf
+Gay/figs/gay4.pdf
+Gay/figs/gay3.pdf
+Gay/figs/gay2.pdf
+Gay/figs/gay13.pdf
+Gay/figs/gay12.pdf
+Gay/figs/gay11.pdf
+Gay/figs/gay10.pdf
+Gay/figs/gay1.pdf
+Gay/figs/gay0.pdf
+Gay/data/.naes04.txt.icloud
+Gay/data/.naes04.csv.icloud
+Gay/.gay_simple.Rmd.icloud
+Gay/.gay.Rmd.icloud
+Gay/.DS_Store
+FrenchElection/ps_primaire.R
+FrenchElection/data/ps_primaire.txt
+FrenchElection/.ps_primaire.Rmd.icloud
+FakeMidtermFinal/simulation_based_design.R
+FakeMidtermFinal/simulation.R
+FakeMidtermFinal/.SimulationBasedDesign.Rmd.icloud
+FakeMidtermFinal/.simulation_based_design.Rmd.icloud
+FakeMidtermFinal/.simulation.Rmd.icloud
+FakeMidtermFinal/.FakeMidtermFinal.Rmd.icloud
+FakeKCV/fake_kcv.R
+FakeKCV/.fake_kcv.Rmd.icloud
+Exams/Sample_take_home_final.pdf
+Exams/Sample_in_class_final.pdf
+ElectricCompany/electric.R
+ElectricCompany/data/electric_wide.txt
+ElectricCompany/data/.electric.csv.icloud
+ElectricCompany/.electric.Rmd.icloud
+ElectionsEconomy/hills.R
+ElectionsEconomy/hibbs_coverage.R
+ElectionsEconomy/hibbs.R
+ElectionsEconomy/figs/hibbsline.pdf
+ElectionsEconomy/data/.hibbs.dat.icloud
+ElectionsEconomy/bayes.R
+ElectionsEconomy/.hills.Rmd.icloud
+ElectionsEconomy/.hibbs_coverage.Rmd.icloud
+ElectionsEconomy/.hibbs.Rmd.icloud
+ElectionsEconomy/.hibbs.rda.icloud
+ElectionsEconomy/.DS_Store
+ElectionsEconomy/.bayes.Rmd.icloud
+Earnings/height_and_weight.R
+Earnings/figs/heights.simple0a.pdf
+Earnings/figs/heights.log1b.pdf
+Earnings/figs/heights.log1a.pdf
+Earnings/figs/heights.intercept.pdf
+Earnings/figs/earnings_ppc.pdf
+Earnings/earnings_regression.R
+Earnings/earnings_compound.R
+Earnings/earnings_bootstrap.R
+Earnings/data/wfwcodebook.txt
+Earnings/data/earnings_setup.R
+Earnings/data/.wfw90.dat.icloud
+Earnings/data/.earnings.csv.icloud
+Earnings/.height_and_weight.Rmd.icloud
+Earnings/.earnings_regression.Rmd.icloud
+Earnings/.earnings_compound.Rmd.icloud
+Earnings/.earnings_bootstrap.Rmd.icloud
+Earnings/.DS_Store
+DifferentSoftware/linear.R
+DifferentSoftware/.linear.Rmd.icloud
+Death/polls.R
+Death/figs/.states.ps.icloud
+Death/figs/.polls.ps.icloud
+Death/figs/.deathpolls.ps.icloud
+Death/data/dataforandy.txt
+Death/data/.polls.dat.icloud
+Death/.polls.Rmd.icloud
+Death/.DS_Store
+CrossValidation/figs/fakeloo2.pdf
+CrossValidation/figs/fakeloo1b.pdf
+CrossValidation/figs/fakeloo1a.pdf
+CrossValidation/crossvalidation.R
+CrossValidation/.crossvalidation.Rmd.icloud
+Cows/cows_codebook.txt
+Cows/.cows.dat.icloud
+Coverage/figs/coverage.pdf
+Coverage/coverage.R
+Coverage/.coverage.Rmd.icloud
+Coop/riverbay.R
+Coop/data/.Riverbay.csv.icloud
+Coop/.riverbay.Rmd.icloud
+Congress/figs/congress_plot_grid.pdf
+Congress/data/congress_setup.R
+Congress/data/.congress.csv.icloud
+Congress/data/.cong3.zip.icloud
+Congress/data/.1994.data.icloud
+Congress/data/.1992.asc.icloud
+Congress/data/.1990.asc.icloud
+Congress/data/.1988.asc.icloud
+Congress/data/.1986.asc.icloud
+Congress/data/.1984.asc.icloud
+Congress/data/.1982.asc.icloud
+Congress/data/.1980.asc.icloud
+Congress/data/.1978.asc.icloud
+Congress/data/.1976.asc.icloud
+Congress/data/.1974.asc.icloud
+Congress/data/.1972.asc.icloud
+Congress/data/.1970.asc.icloud
+Congress/data/.1968.asc.icloud
+Congress/data/.1966.asc.icloud
+Congress/data/.1964.asc.icloud
+Congress/data/.1962.asc.icloud
+Congress/data/.1960.asc.icloud
+Congress/data/.1958.asc.icloud
+Congress/data/.1956.asc.icloud
+Congress/data/.1954.asc.icloud
+Congress/data/.1952.asc.icloud
+Congress/data/.1950.asc.icloud
+Congress/data/.1948.asc.icloud
+Congress/data/.1946.asc.icloud
+Congress/data/.1944.asc.icloud
+Congress/data/.1942.asc.icloud
+Congress/data/.1940.asc.icloud
+Congress/data/.1938.asc.icloud
+Congress/data/.1936.asc.icloud
+Congress/data/.1934.asc.icloud
+Congress/data/.1932.asc.icloud
+Congress/data/.1930.asc.icloud
+Congress/data/.1928.asc.icloud
+Congress/data/.1926.asc.icloud
+Congress/data/.1924.asc.icloud
+Congress/data/.1922.asc.icloud
+Congress/data/.1920.asc.icloud
+Congress/data/.1918.asc.icloud
+Congress/data/.1916.asc.icloud
+Congress/data/.1914.asc.icloud
+Congress/data/.1912.asc.icloud
+Congress/data/.1910.asc.icloud
+Congress/data/.1908.asc.icloud
+Congress/data/.1906.asc.icloud
+Congress/data/.1904.asc.icloud
+Congress/data/.1902.asc.icloud
+Congress/data/.1900.asc.icloud
+Congress/data/.1898.asc.icloud
+Congress/data/.1896.asc.icloud
+Congress/congress_plots.R
+Congress/congress_old.R
+Congress/congress.R
+Congress/.DS_Store
+Congress/.congress_plots.Rmd.icloud
+Congress/.congress.Rmd.icloud
+Coins/heads.txt
+Coins/.heads.csv.icloud
+Childcare/library/matching.R
+Childcare/library/estimation.R
+Childcare/library/balance.R
+Childcare/figs/ps.overlap.dens.AZC.pdf
+Childcare/figs/ppvt.bw.pdf
+Childcare/figs/balance.cont.binary.AZC.pdf
+Childcare/figs/balance.both.azc.pdf
+Childcare/figs/bad.pscore.overlap.AZC.pdf
+Childcare/figs/age.educ.freq.AZC.f20.11.pdf
+Childcare/data/childcare_setup.R
+Childcare/data/.cc2.Rdata.icloud
+Childcare/data/.cc2.csv.icloud
+Childcare/childcare.R
+Childcare/.DS_Store
+Childcare/.childcare.Rmd.icloud
+CentralLimitTheorem/heightweight.R
+CentralLimitTheorem/.heightweight.Rmd.icloud
+CausalDiagram/figs/diagram1.pdf
+CausalDiagram/diagrams.R
+CausalDiagram/.diagrams.Rmd.icloud
+Bypass/bypass.txt
+Bypass/.bypass.csv.icloud
+Beauty/data/ProfEvaltnsBeautyPublic.log
+Beauty/data/.ProfEvaltnsBeautyPublic.xls.icloud
+Beauty/data/.ProfEvaltnsBeautyPublic.csv.icloud
+Beauty/beauty.R
+Beauty/.beauty.Rmd.icloud
+Balance/treatcontrol.R
+Balance/figs/bell7l.pdf
+Balance/figs/bell6h.pdf
+Balance/figs/bell6.pdf
+Balance/figs/bell5h.pdf
+Balance/figs/bell5.pdf
+Balance/figs/bell4l.pdf
+Balance/figs/bell3l.pdf
+Balance/figs/bell3h.pdf
+Balance/figs/bell2.pdf
+Balance/figs/bell1l.pdf
+Balance/figs/bell1h.pdf
+Balance/.treatcontrol.Rmd.icloud
+Arsenic/figs/.arsenic.distances.bnew.ps.icloud
+Arsenic/data/noise.txt
+Arsenic/data/arsenic_setup.R
+Arsenic/data/.wells.csv.icloud
+Arsenic/data/.PW_questionnaire.doc.icloud
+Arsenic/data/.all.dta.icloud
+Arsenic/data/.All.csv.icloud
+Arsenic/arsenic_logistic_residuals.R
+Arsenic/arsenic_logistic_gam.R
+Arsenic/arsenic_logistic_building_optimizing.R
+Arsenic/arsenic_logistic_building.R
+Arsenic/arsenic_logistic_apc.R
+Arsenic/.DS_Store
+Arsenic/.arsenic_logistic_residuals.Rmd.icloud
+Arsenic/.arsenic_logistic_building_optimizing.Rmd.icloud
+Arsenic/.arsenic_logistic_building.Rmd.icloud
+Arsenic/.arsenic_logistic_apc.Rmd.icloud
+AgePeriodCohort/figs/third_order_bias_b.pdf
+AgePeriodCohort/figs/third_order_bias_a.pdf
+AgePeriodCohort/figs/second_order_bias_f.pdf
+AgePeriodCohort/figs/second_order_bias_e.pdf
+AgePeriodCohort/figs/second_order_bias_d.pdf
+AgePeriodCohort/figs/second_order_bias_c.pdf
+AgePeriodCohort/figs/second_order_bias_b.pdf
+AgePeriodCohort/figs/second_order_bias_a.pdf
+AgePeriodCohort/figs/focus_group_4.pdf
+AgePeriodCohort/figs/focus_group_3.pdf
+AgePeriodCohort/figs/focus_group_2.pdf
+AgePeriodCohort/figs/focus_group.pdf
+AgePeriodCohort/figs/first_order_bias_b.pdf
+AgePeriodCohort/figs/first_order_bias_a.pdf
+AgePeriodCohort/figs/effect_of_age_adj.pdf
+AgePeriodCohort/figs/decades.pdf
+AgePeriodCohort/figs/death_rates_by_age_and_eth_3.pdf
+AgePeriodCohort/figs/death_rates_by_age_and_eth_2.pdf
+AgePeriodCohort/figs/death_rates_by_age_and_eth_1.pdf
+AgePeriodCohort/figs/births.pdf
+AgePeriodCohort/data/white_nonhisp_death_rates_from_1999_to_2013_by_sex.txt
+AgePeriodCohort/data/white_nonhisp_death_rates_from_1999_to_2013.txt
+AgePeriodCohort/data/white_hisp_death_rates_from_1999_to_2013_by_sex.txt
+AgePeriodCohort/data/deaton.txt
+AgePeriodCohort/data/black_death_rates_from_1999_to_2013_by_sex.txt
+AgePeriodCohort/data/births.txt
+AgePeriodCohort/data/.US-EST00INT-ALLDATA.csv.icloud
+AgePeriodCohort/births_letter.R
+AgePeriodCohort/births.R
+AgePeriodCohort/.DS_Store
+AgePeriodCohort/.births_letter.Rmd.icloud
+AgePeriodCohort/.births.Rmd.icloud
+AcademyAwards/oscars.txt
+AcademyAwards/.oscars.csv.icloud
+.Rproj.user/5DD6B515/pcs/debug-breakpoints.pper
+.Rproj.user/5DD6B515/pcs/files-pane.pper
+.Rproj.user/5DD6B515/pcs/source-pane.pper
+.Rproj.user/5DD6B515/pcs/windowlayoutstate.pper
+.Rproj.user/5DD6B515/pcs/workbench-pane.pper
+.Rproj.user/5DD6B515/persistent-state
+.Rproj.user/5DD6B515/rmd-outputs
+.Rproj.user/5DD6B515/saved_source_markers
+.Rproj.user/5DD6B515/sources/per/t/000BE8CA
+.Rproj.user/5DD6B515/sources/per/t/000BE8CA-contents
+.Rproj.user/5DD6B515/sources/per/t/007A4B8B
+.Rproj.user/5DD6B515/sources/per/t/007A4B8B-contents
+.Rproj.user/5DD6B515/sources/per/t/1B864994
+.Rproj.user/5DD6B515/sources/per/t/1B864994-contents
+.Rproj.user/5DD6B515/sources/per/t/50D6EF31
+.Rproj.user/5DD6B515/sources/per/t/50D6EF31-contents
+.Rproj.user/5DD6B515/sources/per/t/54A93A5E
+.Rproj.user/5DD6B515/sources/per/t/54A93A5E-contents
+.Rproj.user/5DD6B515/sources/per/t/5EF6B9F6
+.Rproj.user/5DD6B515/sources/per/t/5EF6B9F6-contents
+.Rproj.user/5DD6B515/sources/per/t/7F00FCAA
+.Rproj.user/5DD6B515/sources/per/t/7F00FCAA-contents
+.Rproj.user/5DD6B515/sources/per/t/A84C22B4
+.Rproj.user/5DD6B515/sources/per/t/A84C22B4-contents
+.Rproj.user/5DD6B515/sources/per/t/B1EBF4B1
+.Rproj.user/5DD6B515/sources/per/t/B1EBF4B1-contents
+.Rproj.user/5DD6B515/sources/per/t/B51C3422
+.Rproj.user/5DD6B515/sources/per/t/B51C3422-contents
+.Rproj.user/5DD6B515/sources/per/t/BA871093
+.Rproj.user/5DD6B515/sources/per/t/BA871093-contents
+.Rproj.user/5DD6B515/sources/per/t/D337D0D2
+.Rproj.user/5DD6B515/sources/per/t/D337D0D2-contents
+.Rproj.user/5DD6B515/sources/per/t/FF548916
+.Rproj.user/5DD6B515/sources/per/t/FF548916-contents
+.Rproj.user/5DD6B515/sources/per/u/432F52AC
+.Rproj.user/5DD6B515/sources/per/u/432F52AC-contents
+.Rproj.user/5DD6B515/sources/per/u/D9E8FA74
+.Rproj.user/5DD6B515/sources/per/u/D9E8FA74-contents
+.Rproj.user/5DD6B515/sources/prop/0120DAE9
+.Rproj.user/5DD6B515/sources/prop/0383D3A4
+.Rproj.user/5DD6B515/sources/prop/0C48A5A8
+.Rproj.user/5DD6B515/sources/prop/1271F84A
+.Rproj.user/5DD6B515/sources/prop/255C33E4
+.Rproj.user/5DD6B515/sources/prop/263A31B3
+.Rproj.user/5DD6B515/sources/prop/2C62864F
+.Rproj.user/5DD6B515/sources/prop/31F59DC2
+.Rproj.user/5DD6B515/sources/prop/38123754
+.Rproj.user/5DD6B515/sources/prop/395A4EEA
+.Rproj.user/5DD6B515/sources/prop/4570D7F0
+.Rproj.user/5DD6B515/sources/prop/6956ABCD
+.Rproj.user/5DD6B515/sources/prop/6AA542CB
+.Rproj.user/5DD6B515/sources/prop/6DD466C1
+.Rproj.user/5DD6B515/sources/prop/759225DF
+.Rproj.user/5DD6B515/sources/prop/86A7DA11
+.Rproj.user/5DD6B515/sources/prop/888C62E9
+.Rproj.user/5DD6B515/sources/prop/88B3FB2C
+.Rproj.user/5DD6B515/sources/prop/8A4F3DE7
+.Rproj.user/5DD6B515/sources/prop/8A7CFEEF
+.Rproj.user/5DD6B515/sources/prop/901A140E
+.Rproj.user/5DD6B515/sources/prop/97229860
+.Rproj.user/5DD6B515/sources/prop/9C8296AE
+.Rproj.user/5DD6B515/sources/prop/AD28DD33
+.Rproj.user/5DD6B515/sources/prop/C2866FE4
+.Rproj.user/5DD6B515/sources/prop/F32AF32E
+.Rproj.user/5DD6B515/sources/prop/INDEX
+.Rproj.user/5DD6B515/unsaved-notebooks/432F52AC/1/chunks.json
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/c41ag2b3gs72u/000003.metadata
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/c41ag2b3gs72u/000003.png
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/c41ag2b3gs72u/000003.snapshot
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/c5psltrxiqea0/000004.metadata
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/c5psltrxiqea0/000004.png
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/c5psltrxiqea0/000004.snapshot
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cccj9x74e6nvt/000004.metadata
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cccj9x74e6nvt/000004.png
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cccj9x74e6nvt/000004.snapshot
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cdz965ltbg82q/00000a.metadata
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cdz965ltbg82q/00000a.png
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cdz965ltbg82q/00000a.snapshot
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/ce03h90w2v8ki/000002.csv
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/ce249hwtaeg83/000002.csv
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/chunks.json
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cldjhfui5pcs1/000003.metadata
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cldjhfui5pcs1/000003.png
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cldjhfui5pcs1/000003.snapshot
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/cud90o42fsdxg/000004.csv
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/czhnn19ftasy0/000004.metadata
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/czhnn19ftasy0/000004.png
+.Rproj.user/shared/notebooks/35928D01-Chapter 5 - Simulation/1/s/czhnn19ftasy0/000004.snapshot
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/5DD6B515E5EC10ED/chunks.json
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c1dqi8yszw8zj/000002.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c33oy07eyu5uc/000004.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c3l0url7udae7/000002.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c3v3uxyn12e98/000004.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c6iw7jihod4b0/000002.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c8gi8got89asv/.00002d.snapshot.icloud
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c8gi8got89asv/00002c.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c8gi8got89asv/00002d.metadata
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c8gi8got89asv/00002d.png
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/c8kc1rzbx2wet/000002.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/cedoir1xw1fsj/000002.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/cgdrlrfy1zgu6/000002.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/chm834af7ltre/00000d.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/chm834af7ltre/00000e.metadata
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/chm834af7ltre/00000e.png
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/chm834af7ltre/00000e.snapshot
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/chunks.json
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/cjmc5cwevy1iu/000002.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/cl76cji2y6615/000004.csv
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/cl76cji2y6615/000005.error
+.Rproj.user/shared/notebooks/53E36EFD-Chapter 14 - Working with logistic regression/1/s/cokq8n0n774jr/000002.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/5DD6B51512ACE70B/chunks.json
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/5DD6B515A94381B1/chunks.json
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/5DD6B515D82487C1/chunks.json
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/c1pjp4z34u125/000002.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/c3ibykrjursfb/00001b.metadata
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/c3ibykrjursfb/00001b.rdf
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cfbvazt54qavo/000004.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cfbvazt54qavo/000005.error
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cgmqw501bj8gj/00000c.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/chunks.json
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cpmhmhhirbdkq/000004.metadata
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cpmhmhhirbdkq/000004.png
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cpmhmhhirbdkq/000004.snapshot
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cq2lwshr7p4dk/000002.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cqngqxdw25qfg/000002.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/crm79hub2lx1j/000002.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/csmt3bqa0irfj/00001a.metadata
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/csmt3bqa0irfj/00001a.png
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/csmt3bqa0irfj/00001a.snapshot
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/ctqm2k6jyzzzt/000002.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cvh8wf2uah3cb/000006.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cvyjguia78sv8/000004.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cxm6khchtk6xk/000004.csv
+.Rproj.user/shared/notebooks/58A49190-Chapter 9 - Prediction and Bayesian inference/1/s/cxqmpyszahct7/000006.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c28hiwmij1tcg/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c2deviqy1jrxx/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c2feeobamo1n7/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c2hqkysgp4ag7/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c2z82ax4f9ll1/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c4rcheipo1doi/000002.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c4zla73q8mbqv/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c5h6rqs083jd1/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c5x07j2wmggsh/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c79bjtfv0tsgk/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c7zifnsrt05ns/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/c8v14zqmadvht/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/capjou2uhs2nr/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cay2cxb8b1w15/000002.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cc8rh230mo4o9/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/ccmhtdjz33lwq/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cdihh5n7d3h4y/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cf7m4pwvceo3k/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cfrcgd4wh7wxt/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/ch8dlnpu89de5/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cj4n20bwqeenz/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cku6rf9gm6vis/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/clqbfb28bkpvs/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cm3zx22wq1bau/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cmwnwao008s5d/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cnfv34ih1q2n5/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cp71luc9wr6hf/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000003.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000004.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000005.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000006.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000007.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000008.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000009.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000010.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cr1kbiig4v1c3/000011.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cs1qw95r15w0r/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cs6dj1ha3v35m/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/csetup_chunk/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cszp1gld4aakr/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/ctegt2csq8dau/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cuz6jahhrgmsm/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cxvk7m1satezp/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cxwz5lco5dtpt/000002.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cyhr7y08vt12h/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/cz87vae5yszad/000002.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000002.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000003.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000004.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000005.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000006.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000007.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000008.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000009.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000010.csv
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czn1rs3a5lm2j/000011.png
+.Rproj.user/shared/notebooks/5EC309B9-03-Data_Analysis/1/s/czp3fr3490xu4/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/5DD6B51512ACE70B/chunks.json
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/c20hk8n0d8m0a/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/c4hkrq4roossy/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/c76qb0kcjyyi8/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/c7yp7jf17pk4w/.000009.snapshot.icloud
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/c7yp7jf17pk4w/000009.metadata
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/c7yp7jf17pk4w/000009.png
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/ccqkd7q5wqfjw/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cfieb4xiyi8ll/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cgdc018a9yndd/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/chunks.json
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cib8526o7pxuo/000004.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cnh7xev47mewk/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cp1crj00ezar1/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cp1wsgys2ztsj/000008.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cp1wsgys2ztsj/000009.metadata
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cp1wsgys2ztsj/000009.rdf
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/csio6jxlytx4c/000002.csv
+.Rproj.user/shared/notebooks/65C1BBA8-Chapter 12 - Transformations and regression/1/s/cy9p0398hfkr3/00000a.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/5DD6B51512ACE70B/chunks.json
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3fkdrw3kmjk0/000002.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3fkdrw3kmjk0/000002.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3fkdrw3kmjk0/000002.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/000019.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/00001b.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/00001d.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/00001e.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/00001e.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/00001e.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/00001f.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/000020.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/000020.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/c3hr37fn49t3d/000020.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cbnmzloq1vkef/000002.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cfcie894cub4v/000007.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cfcie894cub4v/000007.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cfcie894cub4v/000007.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/chunks.json
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/ciilv4keotsdl/000008.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cmf2nwatod8t4/000010.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cmf2nwatod8t4/000010.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cmf2nwatod8t4/000010.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cn8oukg3s56pn/000006.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cocup4vckzmj6/000016.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cocup4vckzmj6/000016.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cocup4vckzmj6/000016.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/coq289ozm16nm/000002.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/coq289ozm16nm/000003.error
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cqexwk5wtbvki/000007.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cqexwk5wtbvki/000007.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cqexwk5wtbvki/000007.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/crxjj0hi39hur/00002c.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cwvnqepryxd6s/000011.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cwvnqepryxd6s/000011.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cwvnqepryxd6s/000011.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/000023.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/000025.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/000027.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/000028.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/000028.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/000028.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/000029.csv
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/00002a.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/00002a.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/cy3tiy6jrz884/00002a.snapshot
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/czlbkpw7wx6la/000011.metadata
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/czlbkpw7wx6la/000011.png
+.Rproj.user/shared/notebooks/6C5CCD62-Chapter 11 - Assumptions, diagnostics, and model evaluation/1/s/czlbkpw7wx6la/000011.snapshot
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/5DD6B51512ACE70B/chunks.json
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/5DD6B515A94381B1/chunks.json
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/c9by82v702j4s/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cctylmc9jt1tq/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cctylmc9jt1tq/000003.metadata
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cctylmc9jt1tq/000003.png
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cctylmc9jt1tq/000003.snapshot
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cgdszlvx15qdr/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/chunks.json
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/ci7kqyid3fm9m/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cifupmzs2ktid/000009.metadata
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cifupmzs2ktid/000009.png
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cifupmzs2ktid/000009.snapshot
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cjr5lh7q2tey4/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cjr5lh7q2tey4/000003.error
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cn4o0vkjcrsqw/000008.metadata
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cn4o0vkjcrsqw/000008.png
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cn4o0vkjcrsqw/000008.snapshot
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cosphlwkux09u/00000f.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cwgw4ju8ert4b/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cx7boxq5c8zrd/000004.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/cy2e38udpzw08/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/czcaeoh94v2mw/000002.csv
+.Rproj.user/shared/notebooks/6CE37003-Chapter 10 - Linear regression with multiple predictors/1/s/czz1n4acgib4q/000008.csv
+.Rproj.user/shared/notebooks/71FD1B5C-power simulations/1/s/chunks.json
+.Rproj.user/shared/notebooks/71FD1B5C-power simulations/1/s/cye7b67dbnu61/000002.csv
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/c4z1xhp2i0a71/000002.csv
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/c6ovdj2w809i2/000006.metadata
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/c6ovdj2w809i2/000006.png
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/c6ovdj2w809i2/000006.snapshot
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/chunks.json
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/cmgee19s8jkfm/000002.csv
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/csunfs1asnd1j/000008.metadata
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/csunfs1asnd1j/000008.png
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/csunfs1asnd1j/000008.snapshot
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/cvb8qaxedd5sc/000009.metadata
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/cvb8qaxedd5sc/000009.png
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/cvb8qaxedd5sc/000009.snapshot
+.Rproj.user/shared/notebooks/75E9E373-Chapter 6 - Background on regression modeling/1/s/cy0wey2xst6gn/000002.csv
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/c909w8qsw690s/000002.csv
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cb6ict98tm24q/000046.metadata
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cb6ict98tm24q/000046.png
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cb6ict98tm24q/000046.snapshot
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cbkm49w1oyojs/000002.csv
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/chunks.json
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cnb0u9zr5i8m7/000002.csv
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/col61tg6aa04d/000009.csv
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/crjoawkc7urs4/000004.csv
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/csyv7r6xputeq/000003.metadata
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/csyv7r6xputeq/000003.png
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/csyv7r6xputeq/000003.snapshot
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000002.csv
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000003.metadata
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000003.png
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000004.metadata
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000004.png
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000005.metadata
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000005.png
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/cx9cyrgjb2a5o/000005.snapshot
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/czfbqqnzybh8k/000003.metadata
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/czfbqqnzybh8k/000003.png
+.Rproj.user/shared/notebooks/AEB6F9D8-Chapter 15 - Other generalized linear models/1/s/czfbqqnzybh8k/000003.snapshot
+.Rproj.user/shared/notebooks/BCC17D9F-01-Data_Cleaning/1/s/chunks.json
+.Rproj.user/shared/notebooks/C7ED60AC-Chapter 8 - Fitting regression models/1/5DD6B515A94381B1/chunks.json
+.Rproj.user/shared/notebooks/C7ED60AC-Chapter 8 - Fitting regression models/1/s/chunks.json
+.Rproj.user/shared/notebooks/C7ED60AC-Chapter 8 - Fitting regression models/1/s/ci2ofb24czsq0/000002.csv
+.Rproj.user/shared/notebooks/C7ED60AC-Chapter 8 - Fitting regression models/1/s/cp6hqm98pxp3f/000002.csv
+.Rproj.user/shared/notebooks/D35071D9-CHapter 17 - Poststratification and missing-data imputation/1/5DD6B515DB4E2C7D/chunks.json
+.Rproj.user/shared/notebooks/D35071D9-CHapter 17 - Poststratification and missing-data imputation/1/s/chunks.json
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/5DD6B51512ACE70B/chunks.json
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/5DD6B515D82487C1/chunks.json
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/5DD6B515D95350D0/chunks.json
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/c0gzapysuu368/000002.csv
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/c9glmchwivw27/000002.csv
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/caap48mcwfoau/000002.csv
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/cdytbrrkbh8av/000002.csv
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/chunks.json
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/ckybt1mbqdy0z/000004.csv
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/cl6vp4oqqhtpp/000003.metadata
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/cl6vp4oqqhtpp/000003.png
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/cl6vp4oqqhtpp/000003.snapshot
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/cvj1mx4i73rrm/000002.csv
+.Rproj.user/shared/notebooks/DC8C9869-Chapter 7 - Linear Regression with a Single Predictor/1/s/cw8m2qq96gg0k/000004.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/c30f2h3qmf8sq/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/c4j81cr33yxp4/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/ccgduojqinv24/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/cdotp6pp3qdzt/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/cfirz7z9uew54/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/cgzbekvvrngc7/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/chunks.json
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/cocluth5g3849/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/cpdql9l9xzj3h/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/cqjl7r2oi12sg/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/csetup_chunk/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/ct20nsjkskllf/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/ctlfwsnxr7kle/000002.csv
+.Rproj.user/shared/notebooks/E38C9E2D-01-Data_Cleaning/1/s/cw14b39cc5gh2/000002.csv
+.Rproj.user/shared/notebooks/F870641D-Chapter 1 - Overview/1/5DD6B51512ACE70B/chunks.json
+.Rproj.user/shared/notebooks/F870641D-Chapter 1 - Overview/1/5DD6B51543DB3EB4/chunks.json
+.Rproj.user/shared/notebooks/F870641D-Chapter 1 - Overview/1/5DD6B515A94381B1/chunks.json
+.Rproj.user/shared/notebooks/F870641D-Chapter 1 - Overview/1/s/chunks.json
+.Rproj.user/shared/notebooks/F870641D-Chapter 1 - Overview/1/s/crioln8zkaoz5/00000a.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/5DD6B515D95350D0/chunks.json
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/5DD6B515E5EC10ED/chunks.json
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/c2etof3sjjo7p/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/c5vmo0gi8x7xu/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/c7d2bde6fuxm0/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/c9wae4k6wx2t5/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/caayzm0p68eze/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cbp4ndsys4cl7/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/ccgv5wbkzzn9d/000034.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/ccgv5wbkzzn9d/000035.metadata
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/ccgv5wbkzzn9d/000035.png
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/ccgv5wbkzzn9d/000035.snapshot
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cd0304zllnwc7/.000022.snapshot.icloud
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cd0304zllnwc7/000021.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cd0304zllnwc7/000022.metadata
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cd0304zllnwc7/000022.png
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cgor6ryyb9in0/000004.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cgor6ryyb9in0/000005.metadata
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cgor6ryyb9in0/000005.rdf
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cgor6ryyb9in0/000006.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/ch8gibdw134jq/000004.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/chcrvl0ci4f4m/000004.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/chno1ufxavkfh/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/chunks.json
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/clwow0ti9h89w/000010.metadata
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/clwow0ti9h89w/000010.png
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/clwow0ti9h89w/000010.snapshot
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/clwow0ti9h89w/temp/000010.png
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cqftraxjeslj8/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/crz9751kx6mph/000002.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cveg1kx4nu2mu/00000a.csv
+.Rproj.user/shared/notebooks/FBF19553-Chapter 13 - Logistic Regression/1/s/cxt1iiiyn3jhq/000002.csv
+.Rproj.user/shared/notebooks/patch-chunk-names
+.Rproj.user/shared/notebooks/paths

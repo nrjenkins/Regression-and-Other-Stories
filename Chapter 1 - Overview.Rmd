@@ -1,0 +1,56 @@
+---
+title: "Chapter 1 - Overview"
+output: html_notebook
+---
+
+# Three challenges of statistics
+
+1. generalizing from sample to population
+
+2. generalizing from treatment to control group
+
+3. generalizing from observed measurements to the underlying constructs of interest
+
+# Why learn regression?
+
+* regression is a method that allows researchers to summarize how predictions or average values of an outcome vary across individuals defined by a set of predictors
+
+```{r}
+library(tidyverse)
+
+hibbs <- read.table("ElectionsEconomy/data/hibbs.dat", header = TRUE)
+
+ggplot(data = hibbs, aes(x = growth, y = vote)) +
+  geom_point() +
+  labs(x = "Average recent growth in personal income",
+       y = "Incumbent party's vote share")
+
+library(rstanarm)
+m1 <- stan_glm(vote ~ growth, data = hibbs)
+
+# add regression line to plot
+ggplot(data = hibbs, aes(x = growth, y = vote)) +
+  geom_point() +
+  geom_abline(intercept = coef(m1)[[1]], slope = coef(m1)[[2]]) +
+  labs(x = "Average recent growth in personal income",
+       y = "Incumbent party's vote share") +
+  geom_label(label = "y = 46.3 + 3.0x", x = 3, y = 53)
+
+print(m1)
+```
+
+# Exercises
+
+1a. 
+
+```{r}
+heli <- read.table("Helicopters/data/helicopters.txt", header = TRUE)
+```
+
+1b. 
+
+```{r}
+ggplot()
+```
+
+
