@@ -1,0 +1,222 @@
+---
+title: "Chapter 10 - Linear regression with multiple predictors"
+output: html_notebook
+---
+
+# Adding predictors to a model
+
+## Starting with a binary predictor
+
+We start by modeling the children's test scores given an indicator for wether the mother graduated from high school:
+
+```{r}
+load("KidIQ/data/kidiq.rda")
+
+fit.1 <- stan_glm(kid_score ~ mom_hs, data = kidiq)
+print(fit.1)
+
+ggplot(data = kidiq, aes(x = mom_hs, y = kid_score)) +
+  geom_point(position = position_jitter(), shape = 1) +
+  geom_abline(intercept = coef(fit.1)[1], slope = coef(fit.1)[2])
+```
+
+## A single continuous predictor
+
+```{r}
+fit.2 <- stan_glm(kid_score ~ mom_iq, data = kidiq)
+print(fit.2)
+```
+
+## Including both predictors
+
+```{r}
+fit.3 <- stan_glm(kid_score ~ mom_hs + mom_iq, data = kidiq)
+print(fit.3)
+
+ggplot(data = kidiq, aes(x = mom_iq, y = kid_score, color = as.factor(mom_hs))) +
+  geom_point(position = position_jitter(), shape = 1) +
+  geom_abline(intercept = coef(fit.3)[1], slope = coef(fit.3)[3]) +
+  geom_abline(intercept = coef(fit.2)[1], slope = coef(fit.2)[2])
+```
+
+## Understanding the fitted model
+
+* The intercept: if a child had a mother with an IQ of 0 and did not complete HS, then we would predict this child's test score to be 26
+
+* The coefficient of maternal HS completion: comparing children whose mothers have the same IQ, but who differed in whether they completed HS, the model predicts an expected difference of 6 in their test scores
+
+* The coefficient of maternal IQ: comparing children whose mothers have the same level of HS but who differed by 1 IQ point, the model predicts an expected diffference of 0.6 points in the child's test score
+
+# Interpreting regression coefficients
+
+## It's not always possible to change one predictor while holding all others constant
+
+## Counterfactual and predictive interpretations
+
+* the predictive interpretation: considers who the outcome variable differs, on average, when comparing two groups of items that differ by 1 in the relevant predictor while being identical in all the other predictors
+
+* the counterfactual interpretation: expressed in terms of changes within individuals, rather than comparisons between individuals. Here the coefficient is the expected change in $y$ caused by adding 1 to the relevant predictor, while leaving all the other predictors in the model unchanged.
+
+* regression only tells us about comparisons between units, not about changes within units
+
+# Interactions
+
+```{r}
+fit.4 <- stan_glm(kid_score ~ mom_hs * mom_iq, data = kidiq)
+print(fit.4)
+
+fig.10.4a <- 
+  ggplot(data = kidiq, aes(x = mom_iq, y = kid_score, color = factor(mom_hs))) +
+  geom_point(position = position_jitter(), shape = 1, show.legend = FALSE) +
+  geom_abline(intercept = c(coef(fit.4)[1], sum(coef(fit.4)[1:2])),
+              slope = c(coef(fit.4)[3], sum(coef(fit.4)[3:4])),
+              color = c("gray", "black")) +
+  scale_color_manual(values = c("gray", "black")) +
+  labs(x = "Mother IQ score", y = "Child test score")
+
+fig.10.4b <- 
+  ggplot(data = kidiq, aes(x = mom_iq, y = kid_score, color = factor(mom_hs))) +
+  geom_point(position = position_jitter(), shape = 1, show.legend = FALSE) +
+  geom_abline(intercept = c(coef(fit.4)[1], sum(coef(fit.4)[1:2])),
+              slope = c(coef(fit.4)[3], sum(coef(fit.4)[3:4])),
+              color = c("gray", "black")) +
+  scale_color_manual(values = c("gray", "black")) +
+  labs(x = "Mother IQ score", y = "Child test score") +
+  xlim(0, 150)
+
+library(patchwork)
+fig.10.4a + fig.10.4b
+```
+
+* The intercept: if a child had a mother with an IQ of 0 and did not complete HS, then we would predict this child's test score to be 26
+
+* The coefficient of maternal HS completion: comparing children whose mothers have the same IQ, but who differed in whether they completed HS, the model predicts an expected difference of 6 in their test scores
+
+* The coefficient of maternal IQ: comparing children whose mothers have the same level of HS but who differed by 1 IQ point, the model predicts an expected difference of 0.6 points in the child's test score
+
+* The coefficient on the interaction term represents the difference in the slope for `mom_iq`, comparing children with mothers who did and did not complete HS: that is, the difference between the slopes of the light and dark lines in Figure 10.4
+
+## When should we look for interactions?
+
+* we look for them with predictors that have large coefficients when not interacted
+
+# Indicator variables
+
+```{r}
+earnings <- read_csv("Earnings/data/earnings.csv")
+
+library(tidyverse)
+glimpse(earnings)
+
+fit.1 <- stan_glm(weight ~ height, data = earnings)
+print(fit.1)
+
+# prediction for someone who is 66 inches tall
+coefs.1 <- coef(fit.1)
+predicted.1 <- coefs.1[1] + coefs.1[2] * 66
+predicted.1
+
+# or with posterior_predict
+new <- tibble(height = 66)
+pred <- posterior_predict(fit.1, newdata = new)
+mean(pred)
+```
+
+## Centering a predictor
+
+```{r}
+earnings <- 
+  earnings %>%
+  mutate(height_c = height - mean(height))
+
+fit.2 <- stan_glm(weight ~ height_c, data = earnings)
+print(fit.2)
+```
+
+## Including a binary variable in a regression
+
+```{r}
+fit.3 <- stan_glm(weight ~ height_c + male, data = earnings)
+print(fit.3)
+
+# compute the predicted weight for a 70 inch tall woman:
+new <- tibble(height_c = 4, male = 0)
+pred <- posterior_predict(fit.3, newdata = new)
+mean(pred)
+```
+
+## Using indicator variables for multiple levels of a categorical predictor
+
+```{r}
+fit.4 <- stan_glm(weight ~ height_c + male + factor(ethnicity), 
+                  data = earnings)
+print(fit.4)
+```
+
+## Changing the baseline factor level
+
+```{r}
+earnings <- 
+  earnings %>%
+  mutate(eth = factor(ethnicity),
+         eth = relevel(eth, ref = "White"))
+
+fit.5 <- stan_glm(weight ~ height_c + male + eth, 
+                  data = earnings)
+print(fit.5)
+```
+
+# Example: uncertainty in predicting congressional elections
+
+## Background
+
+```{r}
+congress <- read_csv("Congress/data/congress.csv")
+
+ggplot(data = congress, aes(x = v88)) +
+  geom_histogram()
+
+ggplot(data = congress, aes(x = v86, y = v88)) +
+  geom_point()
+
+ggplot(data = congress, aes(x = v86_adj, y = v88_adj)) +
+  geom_point()
+```
+
+## Fitting the model
+
+```{r}
+data88 <- tibble(
+  vote = congress$v88_adj,
+  past_vote = congress$v86_adj,
+  inc = congress$inc88
+)
+
+fit.88 <- stan_glm(vote ~ past_vote + inc, data = data88)
+print(fit.88, digits = 2)
+```
+
+## Simulation for inferences and predictions of new data points
+
+```{r}
+sims.88 <- as.matrix(fit.88)
+
+# use these simulations to predict district-by-district election outcome in 1990
+data90 <- tibble(
+  past_vote = congress$v88_adj,
+  inc = congress$inc90
+)
+
+pred90 <- posterior_predict(fit.88, newdata = data90)
+```
+
+## Predictive simulation for a nonlinear function of new data
+
+```{r}
+# summary of election won by Democrats
+dems.pred <- rowSums(pred90 > 0.5)
+median(dems.pred)
+sd(dems.pred)
+```
+
+# Mathematical notation and statistical inference
