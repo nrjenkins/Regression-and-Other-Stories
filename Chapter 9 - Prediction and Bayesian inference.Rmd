@@ -1,0 +1,306 @@
+---
+title: "Chapter 9 - Prediction and Bayesian inference"
+output: html_notebook
+---
+
+* Bayesian inference involves 3 steps that go beyond classical estimation:
+
+1. the data and model are combined to form a posterior distribution
+
+2. we get uncertainty in this distribution - simulation based predictions for unobserved or future outcomes that accounts for uncertainty in the model parameters
+
+3. we can include additional information into the model using a prior distribution
+
+# Propagating uncertainty in the inference using posterior simulations
+
+```{r}
+hibbs <- read.table("ElectionsEconomy/data/hibbs.dat", header = TRUE)
+
+fit.1 <- stan_glm(vote ~ growth, data = hibbs)
+print(fit.1)
+```
+
+* these numbers are summaries of a matrix of simulations representing different possible values of the parameter vector $(a, b, \sigma)$. We get a set of posterior simulation rather than a single point estimate because we have uncertainty about these parameters
+
+* we can access the simulations by extracting the fitted model as a matrix:
+
+```{r}
+sims <- as.matrix(fit.1)
+Median <- apply(sims, 2, median)
+MAD_SD <- apply(sims, 2, mad)
+print(cbind(Median, MAD_SD))
+
+# or
+posterior <- as_tibble(fit.1)
+Median <- map_dbl(posterior, median)
+MAD_SD <- map_dbl(posterior, mad)
+print(bind_rows(Median, MAD_SD))
+```
+
+## Uncertainty in the regression coefficients and implied uncertainty in the regression line
+
+```{r}
+# fig 9.1
+int <- ggplot(data = posterior, aes(x = `(Intercept)`)) +
+  geom_histogram()
+
+slope <- ggplot(data = posterior, aes(x = growth)) +
+  geom_histogram()
+
+library(patchwork)
+int + slope
+
+# fig 9.2
+plot1 <- ggplot(data = posterior, aes(x = `(Intercept)`, y = growth)) +
+  geom_point(shape = 1)
+
+plot.data <- 
+  posterior %>%
+  mutate(n = row_number()) %>%
+  sample_n(100)
+
+plot2 <- ggplot(data = hibbs, aes(x = growth, y = vote)) +
+  geom_abline(intercept = plot.data$`(Intercept)`, slope = plot.data$growth, 
+              alpha = 0.4) +
+  geom_point(color = "white", size = 3) +
+  geom_point(color = "black", size = 2) +
+  geom_hline(yintercept = 50, alpha = 0.4)
+
+plot1 + plot2
+```
+
+## Using the matrix of posterior simulations to express uncertainty about a parameter estimate or function of parameter estimates
+
+* suppose we wanted a standard error for a combination of parameters like $a / b$:
+
+```{r}
+a <- posterior$`(Intercept)`
+b <- posterior$growth
+z <- a / b
+print(c(median(z), mad(z)))
+```
+
+# Prediction and uncertainty: `predict`, `posterior_linpred`, and `posterior_predict`
+
+After fitting a regression we can use the model to predict a new data point, or a set of new points. We can make three sorts of predictions:
+
+1. the point prediction: based on the fitted model, this is the best point estimate of the average value for new data points with the new value of x
+
+2. the linear predictor with uncertainty: the represents the distribution of uncertainty about the expected or average value of $y$ for new data points with predictors
+
+3. the predictive distribution for a new observation: this represents uncertainty about a new observation $y$ with predictions
+
+## Point prediction using `predict`
+
+We will predict the incumbent's vote share, conditional on economic growth of 2%
+
+```{r}
+new <- tibble(growth = 2.0)
+
+# compute point prediction
+y.point.pred <- predict(fit.1, newdata = new)
+y.point.pred
+```
+
+## Linear predictor with uncertainty using `posterior_linpred` or `posterior_epred`
+
+* we use `posterior_linpred` to get uncertainty in the value of the fitted regression line. This will return a vector of posterior simulations from a distribution whose mean equals the point prediction obtained above and whose standard deviation represents uncertainty in the fitted model:
+
+```{r}
+y.linpred <- posterior_linpred(fit.1, newdata = new)
+head(y.linpred)
+```
+
+## Predictive distribution for a new observation using `posterior_predict`
+
+```{r}
+y.pred <- posterior_predict(fit.1, newdata = new)
+head(y.pred)
+
+# visually
+hist(y.pred)
+
+# numerically
+y.pred.median <- median(y.pred)
+y.pred.mad <- mad(y.pred)
+win_prob <- mean(y.pred > 50)
+cat("Predicted Clinton percentage of 2-party vote:", round(y.pred.median,1),
+    ", with s.e.", round(y.pred.mad, 1), "\nPr (Clinton win) =", 
+    round(win_prob, 2), sep = " ") 
+```
+
+## Prediction given a range of input values
+
+We can also use these functions to generate a range of predicted values, for example predicting the election outcome for a grid of possible values of economic growth from -2% to +4%
+
+```{r}
+new.grid <- tibble(
+  growth = seq(from = -2.0, to = 4.0, by = 0.5)
+)
+y.point.pred.grid <- predict(fit.1, newdata = new.grid)
+y.linpred.grid <- posterior_linpred(fit.1, newdata = new.grid)
+y.pred.grid <- posterior_predict(fit.1, newdata = new.grid)
+```
+
+## Propagating uncertainty
+
+* our predictor of economic growth also has some uncertainty 
+
+```{r}
+n_sims <- nrow(sims)
+x.new <- rnorm(n_sims, mean = 2.0, sd = 0.3)
+y.pred <- rnorm(n_sims, a + b * x.new, sigma)
+
+y.pred.median <- median(y.pred)
+y.pred.mad <- mad(y.pred)
+win_prob <- mean(y.pred > 50)
+cat("Predicted Clinton percentage of 2-party vote:", round(y.pred.median,1),
+    ", with s.e.", round(y.pred.mad, 1), "\nPr (Clinton win) =", 
+    round(win_prob, 2), sep = " ") 
+```
+
+## Simulating uncertainty for the linear predictor and new observation
+
+```{r}
+earnings <- read_csv("Earnings/data/earnings.csv")
+
+fit.1 <- stan_glm(weight ~ height, data = earnings)
+print(fit.1)
+```
+
+The intercept is difficult to interpret, so we center height:
+
+```{r}
+earnings$c_height <- earnings$height - mean(earnings$height)
+fit.2 <- stan_glm(weight ~ c_height, data = earnings)
+print(fit.2)
+```
+
+* the average weight for 66-inchers in the population is 153.2 pounds with an uncertainty of 0.6
+
+* if we wanted to predict the weight of any particular 66-inch-tall person chosen at random from the population we would need to include the predictive uncertainty, whose standard deviation is estimated to be 29
+
+* in general, when applying a fitted regression to a new data point $x^{new}$, we can make inferences about the *linear predictor* $a + bx^{new}$ or about the *predicted value* $y^{new} a + bx^{new} + \epsilon$
+
+* For example, let's predict the weight of a person who is 70 inches tall, so that `c_height = height - 66 = 4`:
+
+* linear predictor: $a + 4.0b$
+
+* predicted value: $a + 4.0b + \epsilon$
+
+* the linear prediction represents the predicted average weight for everyone of this height in the population
+
+* if our model was the true model, then the value for sigma of 29 could be used as an estimate of the standard deviation for the predicted value. However, because of uncertainty in the estimate of the regression parameters, the estimated standard deviation is slightly higher than the estimated sigma
+
+```{r}
+new <- tibble(
+  c_height = 4
+)
+
+# compute the point prediction:
+y.point.pred2 <- predict(fit.2, newdata = new)
+
+# simulations of the linear predictor
+y.linpred2 <- posterior_linpred(fit.2, newdata = new)
+
+# posterior predictive simulations for a single new person of height 70 inches
+y.postpred2 <- posterior_predict(fit.2, newdata = new)
+```
+
+# Example of Bayesian inference: beauty and sex ratio
+
+A study found that parents in higher attractiveness categories had more girls
+
+## Prior information
+
+* human sex ratio occurs in a very narrow range. 48.7% girls among whites, 49.2% among blacks
+
+* similar differences of half of a percentage point or less have been found when comparing based on factors such as birth order, maternal age, or season of birth. given that attractiveness is itself only subjectively measured, we find it hard to believe that any difference between more and less attractive parents could be as large as 0.5%
+
+# Uniform, weakly informative, and informative priors in regression
+
+## Uniform prior distribution
+
+```{r}
+fit.3 <- stan_glm(vote ~ growth, data = hibbs, prior_intercept = NULL, 
+                  prior = NULL, prior_aux = NULL)
+print(fit.3)
+
+sims <- as.data.frame(fit.3)
+a <- sims[ , 1]
+b <- sims[ , 2]
+plot(a, b)
+
+# or
+ggplot(data = sims, aes(x = `(Intercept)`, y = growth)) +
+  geom_point()
+```
+
+## Default prior distribution
+
+```{r}
+fit.1 <- stan_glm(vote ~ growth, data = hibbs)
+
+# or
+sd_x <- sd(hibbs$growth)
+sd_y <- sd(hibbs$vote)
+mean_y <- mean(hibbs$vote)
+
+fit.1a <- stan_glm(vote ~ growth, data = hibbs, 
+                   prior = normal(0, 2.5 * sd_y / sd_x),
+                   prior_intercept = normal(mean_y, 2.5 * sd_y),
+                   prior_aux = exponential(1 / sd_y))
+```
+
+## Weakly informative prior distribution based on subject-matter knowledge
+
+* for a model of vote share, we might use a prior of 50 with sd of 10 for the intercept
+
+* considering that economic growth typically ranges between 0-4% we might use a prior mean of 5 with standard deviation of 5 to tell the model that the values will probably be positive and probably not be greater than 10
+
+```{r}
+fit.4 <- stan_glm(vote ~ growth, data = hibbs,
+                  prior = normal(5, 5),
+                  prior_intercept = normal(50, 10))
+print(fit.4)
+```
+
+## Example where an informative prior makes a difference: Beauty and sex ratio
+
+```{r}
+load("SexRatio/data/sexratio.rda")
+
+# frequentist
+fit.5 <- lm(y ~ x, data = sexratio)
+
+library(arm)
+display(fit.5)
+
+ggplot(data = sexratio, aes(x = x, y = y)) +
+  geom_point() +
+  geom_abline(intercept = coef(fit.5)[1], slope = coef(fit.5)[2])
+
+# default weak prior
+fit.5a <- stan_glm(y ~ x, data = sexratio)
+print(fit.5a)
+
+ggplot(data = sexratio, aes(x = x, y = y)) +
+  geom_point() +
+  geom_abline(intercept = coef(fit.5)[1], slope = coef(fit.5)[2]) +
+  geom_abline(intercept = coef(fit.5a)[1], slope = coef(fit.5a)[2], 
+              color = "blue")
+
+# informative prior
+fit.5b <- stan_glm(y ~ x, data = sexratio, prior_intercept = normal(48.4, 0.5),
+                   prior = normal(0, 0.2))
+print(fit.5b)
+
+ggplot(data = sexratio, aes(x = x, y = y)) +
+  geom_point() +
+  geom_abline(intercept = coef(fit.5)[1], slope = coef(fit.5)[2]) +
+  geom_abline(intercept = coef(fit.5a)[1], slope = coef(fit.5a)[2], 
+              color = "blue") +
+  geom_abline(intercept = coef(fit.5b)[1], slope = coef(fit.5b)[2], 
+              color = "red")
+```
+
