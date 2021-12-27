@@ -1,0 +1,306 @@
+---
+title: "Chapter 11 - Assumptions, diagnostics, and model evaluation"
+output: html_notebook
+---
+
+# Plotting the data and fitted model
+
+## Displaying a regression line as a function of one input variable
+
+```{r}
+load("KidIQ/data/kidiq.rda")
+
+library(rstanarm)
+fit.1 <- stan_glm(kid_score ~ mom_iq, data = kidiq)
+print(fit.1)
+
+plot(kidiq$mom_iq, kidiq$kid_score, xlab = "Mother IQ score", 
+     ylab = "Child test score")
+abline(coef(fit.1)[1], coef(fit.1)[2])
+
+# or
+library(ggplot2)
+ggplot(data = kidiq, aes(x = mom_iq, y = kid_score)) +
+  geom_point(shape = 1) +
+  geom_abline(intercept = coef(fit.1)[1], slope = coef(fit.1)[2])
+```
+
+## Displaying two fitted regression lines
+
+### Model with no interation
+
+```{r}
+fit.2 <- stan_glm(kid_score ~ mom_hs + mom_iq, data = kidiq)
+
+colors <- ifelse(kidiq$mom_hs == 1, "black", "gray")
+plot(kidiq$mom_iq, kidiq$kid_score, col = colors, pch = 20)
+b_hat <- coef(fit.2)
+abline(b_hat[1] + b_hat[2], b_hat[3], col = "black")
+abline(b_hat[1], b_hat[3], col = "gray")
+
+# or
+ggplot(data = kidiq, aes(x = mom_iq, y = kid_score, color = mom_hs)) +
+  geom_point() +
+  geom_abline(intercept = sum(coef(fit.2)[1:2]), slope = coef(fit.2)[3], 
+              color = "black") +
+  geom_abline(intercept = coef(fit.2)[1], slope = coef(fit.2)[3], 
+              color = "gray")
+```
+
+### Model with interaction
+
+```{r}
+fit.3 <- stan_glm(kid_score ~ mom_hs + mom_iq + mom_hs:mom_iq, data = kidiq)
+print(fit.3)
+
+ggplot(data = kidiq, aes(x = mom_iq, y = kid_score, color = mom_hs)) +
+  geom_point() +
+  geom_abline(intercept = sum(coef(fit.3)[1:2]), slope = sum(coef(fit.3)[3:4]),
+              color = "black") +
+  geom_abline(intercept = coef(fit.3)[1], slope = coef(fit.3)[3], 
+              color = "gray") +
+  theme_bw()
+```
+
+## Displaying uncertainty in the fitted regression
+
+```{r}
+sims.2 <- as.matrix(fit.1)
+n.sims.2 <- nrow(sims.2)
+beta.hat.2 <- apply(sims.2, 2, median)
+
+plot(kidiq$mom_iq, kidiq$kid_score, xlab = "Mother IQ score", 
+     ylab = "Child test score")  
+sims_display <- sample(n.sims.2, 10)  
+for (i in sims_display) {  
+  abline(sims.2[i, 1], sims.2[i, 2], col="gray")  
+}  
+abline(coef(fit.1)[1], coef(fit.1)[2], col = "black")
+
+# or
+library(tidyverse)
+post <- as_tibble(fit.1) %>% sample_n(10)
+
+ggplot(data = kidiq, aes(x = mom_iq, y = kid_score)) +
+  geom_point() +
+  geom_abline(intercept = post$`(Intercept)`, slope = post$mom_iq, 
+              color = "gray") +
+  geom_abline(intercept = coef(fit.1)[1], slope = coef(fit.1)[2], 
+              color = "black") +
+  theme_classic()
+```
+
+## Display using one plot for each input variable
+
+```{r}
+sims_3 <- as.matrix(fit.2)  
+n_sims_3 <- nrow(sims_3) 
+
+par(mfrow = c(1,2))  
+plot(kidiq$mom_iq, kidiq$kid_score, xlab="Mother IQ score", 
+     ylab="Child test score")  
+mom_hs_bar <- mean(kidiq$mom_hs)  
+sims_display <- sample(n_sims_3, 10)  
+for (i in sims_display) {  
+  curve(cbind(1, mom_hs_bar, x) %*% sims_3[i,1:3], lwd=0.5, col="gray", 
+        add=TRUE)  
+}  
+curve(cbind(1, mom_hs_bar, x) %*% coef(fit.2), col="black", add=TRUE)  
+
+plot(kidiq$mom_hs, kidiq$kid_score, xlab="Mother completed high school",  
+     ylab="Child test score")  
+mom_iq_bar <- mean(kidiq$mom_iq)  
+for (i in sims_display) {  
+  curve(cbind(1, x, mom_iq_bar) %*% sims_3[i,1:3], lwd=0.5, col="gray", 
+        add=TRUE)  
+}  
+curve(cbind(1, x, mom_iq_bar) %*% coef(fit.2), col="black", add=TRUE) 
+```
+
+## Plotting the outcome vs. a continuous predictor
+
+```{r}
+n <- 100
+x <- runif(n, 0, 1)
+z <- sample(c(0, 1), n, replace = TRUE)
+a <- 1
+b <- 2
+theta <- 5
+sigma <- 2
+y <- a + b*x + theta*z + rnorm(n, 0, sigma)
+fake <- data.frame(x = x, y = y, z = z)
+
+fit <- stan_glm(y ~ x + z, data = fake)
+
+fig.11.3a <- 
+  ggplot(data = fake %>% filter(z == 0), aes(x, y)) +
+  geom_point() +
+  geom_abline(intercept = coef(fit)[1], slope = coef(fit)[2]) +
+  ylim(0, 10)
+
+fig.11.3b <- 
+  ggplot(data = fake %>% filter(z == 1), aes(x, y)) +
+  geom_point() +
+  geom_abline(intercept = coef(fit)[1] + coef(fit)[3], slope = coef(fit)[2]) +
+  ylim(0, 10)
+
+fig.11.3a + fig.11.3b
+```
+
+## Forming a linear predictor form a multiple regression
+
+The linear predictor is a summary of all the pre-treatment information
+
+```{r}
+N <- 100  
+K <- 10  
+X <- array(runif(N*K, 0, 1), c(N, K))  
+z <- sample(c(0, 1), N, replace=TRUE)  
+a <- 1  
+b <- 1:K  
+theta <- 5
+sigma <- 2
+y <- a + X %*% b + theta * z + rnorm(N, 0, sigma)
+
+fake <- data.frame(X = X, y = y, z = z)
+
+fit <- stan_glm(y ~ X + z, data = fake)
+
+# now compute the linear predictor based on the point estimate of the model
+fake$y_hat <- predict(fit)
+
+# plot the data vs. the linear predictor for each value of z
+fig.11.4a <- 
+  ggplot(data = fake %>% filter(z == 0), aes(x = y_hat, y = y)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) +
+  xlim(0, 50) +
+  ylim(0, 60)
+
+fig.11.4b <- 
+  ggplot(data = fake %>% filter(z == 1), aes(x = y_hat, y = y)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) +
+  xlim(0, 50) +
+  ylim(0, 60)
+
+fig.11.4a + fig.11.4b
+```
+
+# Residual Plots
+
+Better to look at residuals vs. predicted values
+
+# Comparing data to replications from a fitted model
+
+* Posterior predictive checking: simulating replicated datasets under the fitted model and then comparing these to the observed data
+
+## Example: simulation-based checking of a fitted normal distribution
+
+```{r}
+newcomb <- read.table("Newcomb/data/newcomb.txt", header = TRUE)
+
+fit <- stan_glm(y ~ 1, data = newcomb)
+
+# no simulate replications from the parameters in the fitted model
+sims <- as.matrix(fit)
+n_sims <- nrow(sims)
+
+# now we use the simulations to create n fake datasets of 66 observations each
+n <- length(newcomb$y)
+y_rep <- array(NA, c(n_sims, n))
+for (s in 1:n_sims) {
+  y_rep[s, ] <- rnorm(n, sims[s, 1], sims[s, 2])
+}
+
+# os just use the built-in function for posterior predictive replications:
+y_rep <- posterior_predict(fit)
+```
+
+## Visual comparison of actual and replicated datasets
+
+```{r}
+par(mfrow = c(5, 4))
+for (s in sample(n_sims, 20)) {
+  hist(y_rep[s, ])
+}
+
+library(bayesplot)
+ppc_hist(newcomb$y, yrep = y_rep[1:20, ])
+
+ppc_dens_overlay(newcomb$y, yrep = y_rep[1:20, ])
+```
+
+## Checking model fit using a numerical data summary
+
+* the histograms show that the data have some extremely low values that do not appear in the replications
+
+* we can test this be defining a test statistics equal to the minimum value of the data, and then calculating T(y_rep) for each of the replicated datasets:
+
+```{r}
+ppc_stat(newcomb$y, y_rep, stat = "min")
+```
+
+* the smallest observations in each of the hypothetical replications are all much larger than Newcomb's smallest observation, which is indicated by the vertical line on the graph
+
+# Example: predictive simulation to check the fit of a time-series model
+
+## Fitting a first-order autoregression to the unemployment series
+
+```{r}
+unemp <- read.table("Unemployment/data/unemp.txt", header=TRUE)
+
+n <- nrow(unemp)
+unemp <- 
+  unemp %>%
+  mutate(y_lag = lag(y, n = 1L))
+
+fit.lag <- stan_glm(y ~ y_lag, data = unemp)
+print(fit.lag, digits = 2)
+```
+
+* to examine the fit of this model, we simulate replicated data from the fitted model
+
+## Simulating replicated datasets
+
+```{r}
+sims <- as.matrix(fit.lag)  
+n_sims <- nrow(sims) 
+
+y_rep <- array(NA, c(n_sims, n))  
+for (s in 1:n_sims) {  
+  y_rep[s,1] <- y[1]  
+  for (t in 2:n) {  
+    y_rep[s,t] <- sims[s,"(Intercept)"] + sims[s,"y_lag"] * y_rep[s,t-1] +  
+      rnorm(1, 0, sims[s,"sigma"])  
+  }  
+}
+```
+
+## Visual and numerical comparisons of replicated to actual data
+
+* we need to compare the simulated data to the actual data
+
+```{r}
+test <- function(y) {  
+  n <- length(y)  
+  y_lag <- c(NA, y[1:(n-1)]) 
+  y_lag_2 <- c(NA, NA, y[1:(n-2)])  
+  sum(sign(y-y_lag) != sign(y_lag-y_lag_2), na.rm=TRUE)  
+} 
+
+test_y <- test(unemp$y)
+test_rep <- apply(y_rep, 1, test)
+
+hist(test_rep, xlim=range(test(y), test_rep))  
+lines(rep(test(y),2), c(0,n))
+```
+
+# Residual standard deviation and explained variance
+
+```{r}
+median(bayes_R2(fit.1))
+```
+
+# External validation: checking fitted model on new data
+
