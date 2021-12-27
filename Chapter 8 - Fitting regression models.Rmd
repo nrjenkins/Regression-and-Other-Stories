@@ -1,0 +1,77 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Least squares, maximum likelihood, and Bayesian inference
+
+## Least squares
+
+* coefficients are estimated to minimize errors
+
+* residuals are the difference between true value and estimated
+
+* errors are the difference between the true value and true parameters
+
+## Estimation of residual standard deviation
+
+* errors come from a distribution with mean 0 and standard deviation $\sigma$
+
+## Computing the sum of squares directly
+
+```{r}
+rss <- function(x, y, a, b) {
+  resid <- y - (a + b * x)
+  return(sum(resid^2))
+}
+
+rss(hibbs$growth, hibbs$vote, 46.3, 3.0)
+```
+
+## Maximum likelihood
+
+* a likelihood function is the probability density of the data given the parameters and predictors
+
+* least squares and maximum likelihood find the parameters that best fit the data
+
+## Bayesian inference
+
+* bayesian penalizes likelihood inference with a prior distribution
+
+* it also expresses uncertanty using probability
+
+# Comparing two fitting functions: `lm` and `stan-glm`
+
+## Reproducing maximum likelihood using `stan_glm` with flat priors and optimization
+
+```{r}
+# using flat priors
+stan_glm(y ~ x, 
+         data = mydata,
+         prior_intercept = NULL,
+         prior = NULL,
+         prior_aux = NULL,
+         algorithm = "optimizing") # to use maximum penalized likelihood
+
+# this would be equal to
+lm(y ~ x, data = mydata)
+```
+
+## Confidence intervals, uncertainty intervals, compatibility intervals
+
+```{r}
+fake <- tibble(
+  x = 1:10,
+  y = c(1, 1, 2, 3, 4, 8, 13, 21, 34, 55)
+)
+
+fit <- stan_glm(y ~ x, data = fake)
+print(fit)
+
+# extract simulations
+sims <- as.matrix(fit)
+
+# 95% confidence interval for coefficient x
+quantile(sims[ , 2], c(0.025, 0.975))
+```
+
