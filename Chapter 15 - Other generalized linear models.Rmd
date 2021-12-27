@@ -1,0 +1,193 @@
+---
+title: "Chapter 15 - Other generalized linear models"
+output: html_notebook
+---
+
+# Poisson and negative binomial regression
+
+## Poisson model
+
+```{r}
+n <- 50
+x <- runif(n, -2, 2)
+a <- 1
+b <- 2
+linpred <- a + b*x
+y <- rpois(n, exp(linpred))
+fake <- data.frame(x = x, y = y)
+
+library(rstanarm)
+fit.fake <- stan_glm(y ~ x,
+                     family = poisson(link = "log"),
+                     data = fake, 
+                     refresh = 0)
+print(fit.fake)
+
+library(tidyverse)
+ggplot(data = fake, aes(x, y)) +
+  geom_point() +
+  stat_function(fun = function(x) exp(coef(fit.fake)[1] + coef(fit.fake)[2] * x))
+```
+
+## Overdispersion and underdispersion
+
+* refers to data that show more or less variation than expected 
+
+## Negative binomial model for overdispersion
+
+```{r}
+phi_grid <- c(0.1, 1, 10)  
+K <- length(phi_grid)  
+y_nb <- as.list(rep(NA, K))  
+fake_nb <- as.list(rep(NA, K))  
+fit_nb <- as.list(rep(NA, K)) 
+
+library("MASS")  
+for (k in 1:K) {  
+  y_nb[[k]] <- rnegbin(n, exp(linpred), phi_grid[k])  
+  fake_nb[[k]] <- data.frame(x=x, y=y_nb[[k]]) 
+  fit_nb[[k]] <- stan_glm(y ~ x, family=neg_binomial_2(link="log"), data=fake)  
+  print(fit_nb[[k]])  
+}
+
+for (k in 1:K) { 
+  plot(x, y_nb[[k]])  
+  curve(exp(coef(fit_nb[[k]])[1] + coef(fit_nb[[k]])[2]*x), add=TRUE)  
+} 
+```
+
+## Interpreting Poisson or negative binomial regression coefficients
+
+$$y_i \sim \text{negative binomial}(e^{2.8+0.012X_{i1}-0.20X_[i2]}, \phi)$$
+
+* the coefficient of $X_{i1}$ is the expected difference in $y$ for each additional mph of traffic speed. Thus, the expected multiplicative increase is $e^{0.012}=1.027$: a 1.2% positive difference in the rate of traffic accidents per mph.
+
+* the coefficient of $X_{i2}$ tells us that the predictive difference of having traffic signal can be found by multiplying the accident rate by $e^{-0.20} = 0.82$ yeilding a reduction of 18%
+
+## Exposure
+
+* a baseline, some value such as the average flow of vehicles that travel through the intersection in the traffic accidents exmaple
+
+* we can model $y$ as the number of cases in a process with rate $\theta$ and exposure $\mu$
+
+* the logarithm of the exposure is called the offset . This makes the regression coefficients the associations between the predictors and the process rate
+
+## Example: zeros in count data
+
+```{r}
+roaches <- read_csv("Roaches/data/roaches.csv")
+
+roaches <- 
+  roaches %>%
+  mutate(roach100 = roach1 / 100)
+
+fit.1 <- stan_glm(y ~ roach100 + treatment + senior,
+                  family = neg_binomial_2,
+                  offset = log(exposure2),
+                  data = roaches,
+                  refresh = 0)
+print(fit.1)
+```
+
+## Checking model fit by comparing the data to replicated datasets
+
+```{r}
+y.rep.1 <- posterior_predict(fit.1)
+
+n.sims <- nrow(y.rep.1)
+subset <- sample(n.sims, 100)
+
+library(bayesplot)
+ppc_dens_overlay(log10(roaches$y+1), log10(y.rep.1[subset, ]+1))
+```
+
+## What if we had used Poisson regression?
+
+```{r}
+fit.2 <- stan_glm(y ~ roach100 + treatment + senior,
+                  family = poisson, 
+                  offset = log(exposure2),
+                  data = roaches,
+                  refresh = 0)
+print(fit.2)
+```
+
+## Checking the fit of the non-oveerdispersed Poisson regression
+
+```{r}
+y.rep.2 <- posterior_predict(fit.2)
+print(cbind(mean(roaches$y==0), mean(cbind(y.rep.2==0))))
+
+n.sims <- nrow(y.rep.2)
+subset <- sample(n.sims, 100)
+
+ppc_dens_overlay(log10(roaches$y+1), log10(y.rep.2[subset, ]+1))
+```
+
+# Logistic-binomial model
+
+```{r}
+N <- 100
+height <- rnorm(N, 72, 3)
+p <- 0.4 + 0.1*(height - 72) / 3
+n <- rep(20, N)
+y <- rbinom(N, n, p)
+data <- data.frame(n = n, y = y, height = height)
+
+fit.1a <- stan_glm(cbind(y, n - y) ~ height,
+                   family = binomial(link = "logit"),
+                   data = data,
+                   refresh = 0)
+print(fit.1a)
+```
+
+
+# Ordered and unordered categorical regression
+
+## Example of ordered categorical regression
+
+```{r}
+data_2player <- read.csv("Storable/data/2playergames.csv")
+data_401 <- subset(data_2player, person == 401, select = c("vote", "value"))
+data_401$factor_vote <- factor(data_401$vote, 
+                               levels = c(1, 2, 3), labels = c("1", "2", "3"), 
+                               ordered = TRUE)
+
+fit.1 <- stan_polr(factor_vote ~ value, data = data_401, 
+                   prior = R2(0.3, "mean"))
+print(fit.1, digits = 2)
+```
+
+## Displaying the fitted model
+
+```{r}
+c1.5 <- 2.7 / 0.09
+c2.5 <- 5.87 / 0.09
+sigma <- 1
+
+expected <- function (x, c1.5, c2.5, sigma) {
+  p1.5 <- invlogit((x - c1.5) / sigma)  
+  p2.5 <- invlogit((x - c2.5) / sigma)  
+  return((1 * (1 - p1.5) + 2 * (p1.5 - p2.5) + 3 * p2.5))  
+}
+
+plot(data_401$value, data_401$factor_vote, xlim=c(0,100), ylim=c(1,3), xlab="Value", ylab="Vote")  
+lines(rep(c1.5, 2), c(1,2))  
+lines(rep(c2.5, 2), c(2,3))  
+curve(expected(x, c1.5, c2.5, sigma), add=TRUE)
+
+# or
+ggplot(data = data_401, aes(x = value, y = factor_vote)) +
+  geom_point(shape = 1) +
+  geom_segment(aes(x = c1.5, xend = c1.5, y = 1, yend = 2)) +
+  geom_segment(aes(x = c2.5, xend = c2.5, y = 2, yend = 3)) +
+  stat_function(fun = expected, args = list(c1.5 = c1.5, c2.5 = c2.5, 
+                                            sigma = sigma)) +
+  ggpubr::theme_pubr()
+```
+
+
+# Constructive choice models
+
+
+
