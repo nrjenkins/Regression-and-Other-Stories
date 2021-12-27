@@ -1,0 +1,139 @@
+---
+title: "Chapter 7 - Linear regression with a single predictor"
+output: html_notebook
+---
+
+# Example: predicting presidential vote share from the economy
+
+## Fitting a linear model to data
+
+```{r}
+hibbs <- read.table("ElectionsEconomy/data/hibbs.dat", header = TRUE)
+
+library(tidyverse)
+ggplot(data = hibbs, aes(x = growth, y = vote)) +
+  geom_point()
+
+fit.1 <- stan_glm(vote ~ growth, data = hibbs)
+print(fit.1)
+```
+
+## Understanding the fitted model
+
+* at x = 0, the incumbent party's candidate is predicted to receive 46% of the vote
+
+* each percentage point of economic growth that is larger than 0 corresponds to an expected vote share for the incumbent party that is 3 percentage points higher than 46.3%
+
+## Graphinc the fitted regression line
+
+```{r}
+ggplot(data = hibbs, aes(x = growth, y = vote)) +
+  geom_point(shape = 1) +
+  geom_abline(intercept = coef(fit.1)[1], slope = coef(fit.1)[2])
+```
+
+## Using the model to predict
+
+* What was Clinton's forecast vote percentage in 2016? Growth was around 2% so the model predicts $46.3 + 3.0 \cdot 2.0 = 52.3$. Now we need to add uncertainty.
+
+```{r}
+1 - pnorm(q = 50, mean = 52.3, sd = 3.9)
+```
+
+# Checking the model-fitting procedure using fake-data simulation
+
+## Step 1: Creating the pretend world
+
+```{r}
+a <- 46.3
+b <- 3.0
+sigma <- 3.9
+x <- hibbs$growth
+n <- length(x)
+```
+
+## Step 2: Simulate fake data
+
+```{r}
+y <- a + b * x + rnorm(n, 0, sigma)
+fake <- tibble(x, y)
+```
+
+## Step 3: Fitting the model and comparing fitted to assumed values
+
+```{r}
+fit <- stan_glm(y ~ x, data = fake)
+print(fit)
+
+b_hat <- coef(fit)["x"]
+b_se <- se(fit)["x"]
+
+cover_68 <- abs(b - b_hat) < b_se
+cover_95 <- abs(b - b_hat) < 2 * b_se
+cat(paste("68% coverage: ", cover_68, "\n"))
+cat(paste("95% coverage: ", cover_95, "\n"))
+```
+
+## Step 4: Embedding the simulation in a loop
+
+* do the intervals contain the true value the advertised percentage of the time?
+
+```{r}
+n_fake <- 1000  
+cover_68 <- rep(NA, n_fake)  
+cover_95 <- rep(NA, n_fake)  
+for (s in 1:n_fake) {  
+  y <- a + b*x + rnorm(n, 0, sigma)  
+  fake <- data.frame(x, y)  
+  fit <- stan_glm(y ~ x, data=fake, refresh=0) #suppress output on console  
+  b_hat <- coef(fit)["x"]  
+  b_se <- se(fit)["x"]  
+  cover_68[s] <- abs(b - b_hat) < b_se  
+  cover_95[s] <- abs(b - b_hat) < 2*b_se  
+}  
+cat(paste("68% coverage:", mean(cover_68), "\n"))  
+cat(paste("95% coverage:", mean(cover_95), "\n")) 
+```
+
+# Formulating comparisons as regression models
+
+## Estimating the mean is the same as regressing on a constant term
+
+* lets simulate 20 observations from a population with a mean 2.0 and standard deviation 5.0:
+
+```{r}
+n_0 <- 20
+y_0 <- rnorm(n_0, 2.0, 5.0)
+fake_0 <- tibble(y_0)
+print(y_0)
+
+mean(y_0)
+sd(y_0) / sqrt(n_0)
+fit.0 <- stan_glm(y_0 ~ 1, 
+                  data = fake_0,
+                  prior_intercept = NULL,
+                  prior = NULL, 
+                  prior_aux = NULL)
+print(fit.0)
+```
+
+## Estimating a difference is the same as regressing on an indicator variable
+
+```{r}
+n_1 <- 30
+y_1 <- rnorm(n_1, 8.0, 5.0)
+
+diff <- mean(y_1) - mean(y_0)
+se_0 <- sd(y_0) / sqrt(n_0)
+se_1 <- sd(y_1) / sqrt(n_1)
+se <- sqrt(se_0 ^ 2 + se_1 ^ 2)
+
+n <- n_0 + n_1
+y <- c(y_0, y_1)
+x <- c(rep(0, n_0), rep(1, n_1))
+fake <- tibble(x, y)
+fit <- stan_glm(y ~ x, data = fake, prior_intercept = NULL, prior = NULL,
+                prior_aux = NULL)
+print(fit)
+```
+
