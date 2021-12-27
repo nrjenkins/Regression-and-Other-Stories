@@ -1,0 +1,101 @@
+---
+title: "Chapter 6 - Background on regression modeling"
+output: html_notebook
+---
+
+# Fitting a simple regression to fake data
+
+```{r}
+library(rstanarm)
+
+# simulate 20 fake data points y, from the model y = a + bx + e
+x <- 1:20
+n <- length(x)
+a <- 0.2
+b <- 0.3
+sigma <- 0.5
+y <- a + b * x + sigma * rnorm(n)
+```
+
+## Fitting a regression and displaying the results
+
+```{r}
+library(tidyverse)
+
+fake <- tibble(x, y)
+glimpse(fake)
+
+fit.1 <- stan_glm(y ~ x, data = fake)
+print(fit.1, digits = 2)
+
+# plot the data and regression line
+plot(fake$x, fake$y, main = "Data and fitted regression line")
+a_hat <- coef(fit.1)[1]
+b_hat <- coef(fit.1)[2]
+abline(a_hat, b_hat)
+
+## with ggplot
+ggplot(data = fake, aes(x = x, y = y)) +
+  geom_point() +
+  geom_abline(intercept = coef(fit.1)[1], slope = coef(fit.1)[2]) +
+  geom_label(x = 15, y = 3, label = "y = 0.2 + 0.30x")
+```
+
+# Interpreting coefficients as comparisons, not effects
+
+```{r}
+earnings <- read_csv("Earnings/data/earnings.csv")
+
+earnings <- 
+  earnings %>%
+  mutate(earnk = earn / 1000)
+
+fit.2 <- stan_glm(earnk ~ height + male, data = earnings)
+print(fit.2)
+```
+
+* the residual standard deviation is 21.4 which indicates that earnings will be within +- 21,400 of the linear predictor for about 68% of the data points and will be within +- 2 * 21,400 = 42,800 of the linear predictor approximately 95% of the time
+
+* we get a sense of the residual standard deviation by comparing it to the standard deviation of the data and then estimating the proportion of the variance explained
+
+```{r}
+R2 <- 1 - sigma(fit.2)^2 / sd(earnings$earnk)^2
+R2
+```
+
+* the safest interpretation of a regression is as a comparison: under the fitted model, the average difference in earnings, comparing two people of the same sex but one inch different in height, is $600
+
+# Historical origins of regression
+
+```{r}
+heights <- read.table("PearsonLee/data/Heights.txt", header = TRUE)
+glimpse(heights)
+
+fit.1 <- stan_glm(daughter_height ~ mother_height, data = heights)
+print(fit.1)
+
+# plot the model fit
+ggplot(data = heights, aes(x = mother_height, y = daughter_height)) +
+  geom_point(position = position_jitter(), shape = 1, alpha = 0.3) +
+  geom_abline(intercept = coef(fit.1)[1], slope = coef(fit.1)[2], color = "blue")
+```
+
+## How regression to the mean can confuse people about causal inference; demonstration using fake data
+
+```{r}
+# simulate data
+n <- 1000
+true_ability <- rnorm(n, 50, 10)
+noise_1 <- rnorm(n, 0, 10)
+noise_2 <- rnorm(n, 0, 10)
+midterm <- true_ability + noise_1
+final <- true_ability + noise_2
+exams <- tibble(midterm, final)
+
+# plot the data and fitted regression line
+fit.1 <- stan_glm(final ~ midterm, data = exams)
+ggplot(data = exams, aes(x = midterm, y = final)) +
+  geom_point(alpha = 0.3, shape = 1) +
+  geom_abline(intercept = coef(fit.1)[1], slope = coef(fit.1)[2])
+```
+
