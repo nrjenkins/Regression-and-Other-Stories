@@ -1,0 +1,28 @@
+---
+title: "Chapter 17 - Poststratification and missing-data imputation"
+output: html_notebook
+---
+
+# Poststratification: using regression to generalize to a new population
+
+## Poststratificaation using regression prediction
+
+```{r}
+library(tidyverse)
+
+poll <- read_csv("Poststrat/data/poll.csv")
+
+library(rstanarm)
+fit.1 <- stan_glm(vote ~ factor(pid), data = poll)
+print(fit.1, digits = 2)
+
+poststrat.data <- 
+  tibble(pid = c("Republican", "Democrat", "Independent"),
+         N = c(0.33, 0.36, 0.31))
+
+epred.1 <- posterior_epred(fit.1, newdata = poststrat.data)
+
+poststrtat.est.1 <- epred.1 %*% poststrat.data$N / sum(poststrat.data$N)
+print(c(mean(poststrtat.est.1), mad(poststrtat.est.1)), digits = 2)
+```
+
