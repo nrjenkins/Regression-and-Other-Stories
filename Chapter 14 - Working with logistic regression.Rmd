@@ -1,0 +1,268 @@
+---
+title: "Chapter 14 - Working with logistic regression"
+output: html_notebook
+---
+
+# Logistic regression with interactions
+
+```{r}
+wells <- read_csv("Arsenic/data/wells.csv")
+
+library(rstanarm)
+fit.4 <- stan_glm(switch ~ dist100 * arsenic,
+                  family = binomial(link = "logit"),
+                  data = wells)
+print(fit.4, digits = 2)
+```
+
+* constant term: `r plogis(-0.15)` is the estimated probability of switching with the other predictors at 0
+
+* coefficient for distance: comparing two wells that differ by 1 in `dist100`. We need to use the average values to interpret this. invlogit(-0.58 - 0.18 * 1.66) = -0.88
+
+* coefficient for arsenic: comparing two wells that differ by 1 in `arsenic`. Using the average value of dist we get, 0.56 - 0.18 * 0.48 = 0.47. 
+
+* coefficient for the interaction term: can be interpreted in two ways. First, for each additional unit of arsenic, the value -0.18 is added to the coefficient for distance. The importance of distance as a predictor increases for households with higher existing arsenic levels. Second, for each additional 100 meters of distance to the nearest well, the value -0.18 is added to the coefficient for arsenic. The importance of arsenic as a predictor decreases for households that are farther from existing safe wells. 
+
+## Centering the input variables
+
+```{r}
+library(sjmisc)
+wells <- 
+  wells %>%
+  mutate(dist100_c = center(dist100),
+         arsenic_c = center(arsenic))
+
+fit.5 <- stan_glm(switch ~ dist100_c * arsenic_c,
+                  family = binomial(link = "logit"),
+                  data = wells)
+print(fit.5, digits = 2)
+```
+
+* constant term: with distance and aarsenic at their average values the probability of switching is 0.59
+
+* coefficient for distance: with arsenic at its average value, a well with one unit higher on distance has a probability of -0.88 switching
+
+## Graphing the model with interactions
+
+```{r}
+library(tidyverse)
+fig14.3a <- 
+  ggplot(data = wells, aes(x = dist100, y = switch)) +
+  geom_point(position = position_jitter(width = 0.15, height = 0.04), size = 0.05) +
+  stat_function(fun = function(x) invlogit(coef(fit.4)[1] + 
+                                             coef(fit.4)[2] * x + 
+                                             coef(fit.4)[3] * 0.5 +
+                                             coef(fit.4)[4] * x * 0.5),
+                size = 0.8) +
+  stat_function(fun = function(x) invlogit(coef(fit.4)[1] + 
+                                             coef(fit.4)[2] * x + 
+                                             coef(fit.4)[3] * 1 +
+                                             coef(fit.4)[4] * x * 1),
+                size = 0.8) +
+  ggpubr::theme_pubr()
+
+fig14.3b <- 
+  ggplot(data = wells, aes(x = arsenic, y = switch)) +
+  geom_point(position = position_jitter(width = 0.15, height = 0.04), size = 0.05) +
+  stat_function(fun = function(x) invlogit(coef(fit.4)[1] + 
+                                             coef(fit.4)[2] * 0 + 
+                                             coef(fit.4)[3] * x +
+                                             coef(fit.4)[4] * 0 * x),
+                size = 0.8) +
+  stat_function(fun = function(x) invlogit(coef(fit.4)[1] + 
+                                             coef(fit.4)[2] * 0.5 + 
+                                             coef(fit.4)[3] * x +
+                                             coef(fit.4)[4] * 0.5 * x),
+                size = 0.8) +
+  ggpubr::theme_pubr()
+
+library(patchwork)
+fig14.3a + fig14.3b
+```
+
+## Adding social predictors
+
+```{r}
+fit.6 <- stan_glm(switch ~ dist100 + arsenic + educ4 + assoc,
+                  family = binomial(link = "logit"),
+                  data = wells)
+print(fit.6, digits = 2)
+
+fit.7 <- stan_glm(switch ~ dist100 + arsenic + educ4,
+                  family = binomial(link = "logit"),
+                  data = wells)
+print(fit.7, digits = 2)
+```
+
+## Adding further interactions
+
+```{r}
+wells <- 
+  wells %>%
+  mutate(educ4_c = center(educ4))
+
+fit.7 <- stan_glm(switch ~ dist100_c * educ4_c + arsenic_c * educ4_c,
+                  family = binomial(link = "logit"),
+                  data = wells)
+print(fit.7, digits = 2)
+```
+
+
+# Predictive simulation
+
+## Simulating the uncertainty in the estimated coefficients
+
+```{r}
+fit.1 <- stan_glm(switch ~ dist100, family = binomial(link = "logit"), data = wells)
+
+sims <- as.matrix(fit.1)
+n_sims <- nrow(sims)
+plot(sims[ , 1], sims[ , 2], xlab = expression(beta[0]), 
+     ylab = expression(beta[1]))
+
+# or
+sims.df <- as.data.frame(fit.1)
+ggplot(data = sims.df, aes(x = `(Intercept)`, y = dist100)) +
+  geom_point()
+
+plot(wells$dist100, wells$switch)
+for (s in 1:20) {
+  curve(plogis(sims[s, 1] + sims[s, 2] * x), col = "gray", lwd = 0.5, add = TRUE)
+}
+curve(plogis(mean(sims[ , 1]) + mean(sims[ , 2]) * x), add = TRUE)
+
+# or
+wells %>% 
+  add_fitted_draws(fit.1, n = 100) %>%
+  ggplot(aes(x = dist100, y = switch)) +
+  geom_point(data = wells,
+             position = position_jitter(width = 0.04, height = 0.04), 
+             size = 0.02) +
+  geom_line(aes(y = .value, group = .draw), size = 0.05) +
+  stat_function(fun = function(x) invlogit(mean(sims.df$`(Intercept)`) +
+                                             mean(sims.df$dist) * x),
+                size = 0.8) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  ggpubr::theme_pubr() +
+  ylab("Pr(Switch Well)") +
+  xlab("Distance (in meters) to Nearest Safe Well")
+```
+
+## Predictive simulation using the binomial distribution
+
+Now suppose that we would like to predict the switching behavior for new households. We use the binomial distribution to simulate the prediction errors:
+
+```{r}
+n.new <- 10
+n.sims <- 4000
+y.new <- array(NA, c(n.sims, n.new))
+for (s in 1:n.sims) {
+  p.new <- plogis(X.new %*% sims[s, ])
+  y.new[s, ] <- rbinom(n.new, 1, p.new)
+}
+```
+
+
+# Average predictive comparisons on the probability scale
+
+## Demonstration with the well-switching example
+
+```{r}
+fit.7 <- stan_glm(switch ~ dist100 + arsenic + educ4,
+                  family = binomial(link = "logit"),
+                  data = wells,
+                  refresh = 0)
+print(fit.7, digits = 2)
+```
+
+## Average predictive difference in probability of switching
+
+Lets compare two households - one with `dist100` = 0 and one with `dist100` = 1 - but identical on all other variables
+
+```{r}
+delta <- 
+  plogis(coef(fit.7)[1] + coef(fit.7)[2] * 1 + coef(fit.7)[3] * wells$arsenic + 
+           coef(fit.7)[4] * wells$educ4) - 
+  plogis(coef(fit.7)[1] + coef(fit.7)[2] * 0 + coef(fit.7)[3] * wells$arsenic + 
+           coef(fit.7)[4] * wells$educ4)
+round(mean(delta), 2)
+```
+
+* on average, households that are 100 meters from the nearest safe well are 21% less likely to switch, compared to households that are right next to the nearest safe well
+
+## Comparing probabilities of switching for households differing in arsenic levels
+
+```{r}
+delta <- 
+  plogis(coef(fit.7)[1] + coef(fit.7)[2] * wells$dist100 + coef(fit.7)[3] * 1 + 
+           coef(fit.7)[4] * wells$educ4) - 
+  plogis(coef(fit.7)[1] + coef(fit.7)[2] * wells$dist100 + coef(fit.7)[3] * 0.5 + 
+           coef(fit.7)[4] * wells$educ4)
+round(mean(delta), 2)
+```
+
+## Average predictive difference in probability of switching, comparing households with 0 and 12 years of education
+
+```{r}
+delta <- 
+  plogis(coef(fit.7)[1] + coef(fit.7)[2] * wells$dist100 + 
+           coef(fit.7)[3] * wells$arsenic + coef(fit.7)[4] * 3) - 
+  plogis(coef(fit.7)[1] + coef(fit.7)[2] * wells$dist100 + 
+           coef(fit.7)[3] * wells$arsenic + coef(fit.7)[4] * 0)
+round(mean(delta), 2)
+```
+
+## Average predictive comparisions in the presence of interactions
+
+```{r}
+fit.8 <- stan_glm(switch ~ dist100_c * educ4_c + arsenic_c * educ4_c,
+                  family = binomial(link = "logit"),
+                  data = wells,
+                  refresh = 0)
+summary(fit.8, digits = 2)
+
+delta <- 
+  plogis(coef(fit.8)[1] + coef(fit.8)[2] * 1 + coef(fit.8)[3] * wells$arsenic_c + 
+           coef(fit.8)[4] * 1 * wells$educ4_c + 
+           coef(fit.8)[5] * wells$educ4_c * wells$arsenic_c) - 
+  plogis(coef(fit.8)[1] + coef(fit.8)[2] * 0 + coef(fit.8)[3] * wells$arsenic_c + 
+           coef(fit.8)[4] * 0 * wells$educ4_c + 
+           coef(fit.8)[5] * wells$educ4_c * wells$arsenic_c)
+round(mean(delta), 2)
+```
+
+
+# Residuals for discrete-data regression
+
+## Improving a model by transformation
+
+```{r}
+wells <- 
+  wells %>%
+  mutate(log_arsenic = log(arsenic),
+         log_arsenic_c = center(log_arsenic))
+
+fit.9 <- stan_glm(switch ~ dist100_c * educ4_c + log_arsenic_c * educ4_c,
+                  family = binomial(link = "logit"),
+                  data = wells,
+                  refresh = 0)
+summary(fit.8, digits = 2)
+```
+
+## Error rate and comparison to the null model
+
+The error rate is defined as the proportion of the cases for which the deterministic prediction is wrong:
+
+```{r}
+predicted <- fitted(fit.8)
+
+error.rate <- 
+  mean((predicted > 0.5 & wells$switch == 0) | (predicted < 0.5 & wells$switch == 1))
+error.rate
+```
+
+* the error rate should always be less than 1/2. We can compare the model to a model with an intercept only. 
+
+
+# Identification and separation
+
