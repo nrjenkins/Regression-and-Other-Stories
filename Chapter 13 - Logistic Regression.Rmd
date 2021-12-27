@@ -1,0 +1,355 @@
+---
+title: "Chapter 13 - Logistic Regression"
+output: html_notebook
+---
+
+# Logistive regression with a single predictor
+
+```{r}
+logit <- qlogis
+invlogit <- plogis
+```
+
+## Example: modeling political preference given income
+
+```{r}
+load("NES/data/nes.rda")
+
+library(tidyverse)
+# only use data from 1992
+nes <- 
+  nes %>%
+  filter(year == 1992)
+
+library(rstanarm)
+fit.1 <- stan_glm(rvote ~ income, family = binomial(link = "logit"), data = nes)
+print(fit.1, digits = 2)
+
+plot(nes$income, nes$rvote)
+curve(invlogit(coef(fit.1)[1] + coef(fit.1)[2] * x), add = TRUE)
+
+# or
+ggplot(data = nes, aes(x = income, y = rvote)) +
+  geom_point(position = position_jitter(width = 0.15, height = 0.04), size = 0.05) +
+  stat_function(fun = function(x) invlogit(coef(fit.1)[1] + coef(fit.1)[2] * x),
+                xlim = c(1, 5), size = 1) +
+  stat_function(fun = function(x) invlogit(coef(fit.1)[1] + coef(fit.1)[2] * x),
+                xlim = c(-2, 8), size = 0.2) +
+  scale_x_discrete(limits = c("1", "2", "3", "4", "5")) +
+  ggpubr::theme_pubr()
+```
+
+## Fitting the model using `stan_glm` and displaying uncertainty in the fitted model
+
+```{r}
+plot(nes$income, nes$rvote)
+curve(invlogit(coef(fit.1)[1] + coef(fit.1)[2] * x), add = TRUE)
+
+sims.1 <- as.matrix(fit.1)
+n.sims <- nrow(sims.1)
+for (j in sample(n.sims, 20)) {
+  curve(invlogit(sims.1[j, 1] + sims.1[j, 2] * x), col = "gray", lwd = 0.5, 
+        add = TRUE)
+}
+
+# or
+sims <- as.data.frame(fit.1)
+sims <-
+  sims %>%
+  mutate(n = row_number()) %>%
+  sample_n(size = 20)
+
+ggplot(data = nes, aes(x = income, y = rvote)) +
+  geom_point(position = position_jitter(width = 0.15, height = 0.04), size = 0.05) +
+  stat_function(fun = function(x) invlogit(coef(fit.1)[1] + coef(fit.1)[2] * x),
+                xlim = c(1, 5), size = 1) +
+  stat_function(fun = function(x) invlogit(sims[1, 1] + sims[1, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[2, 1] + sims[2, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[3, 1] + sims[3, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[4, 1] + sims[4, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[5, 1] + sims[5, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[6, 1] + sims[6, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[7, 1] + sims[7, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[8, 1] + sims[8, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[9, 1] + sims[9, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[10, 1] + sims[10, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[11, 1] + sims[11, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[12, 1] + sims[12, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[13, 1] + sims[13, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[14, 1] + sims[14, 2] * x), 
+                size = 0.2) +
+  stat_function(fun = function(x) invlogit(sims[15, 1] + sims[15, 2] * x), 
+                size = 0.2) 
+
+# or
+library(tidybayes)
+nes %>%
+  expand(income = seq_range(income, n = 5)) %>%
+  add_fitted_draws(fit.1, n = 100) %>%
+  ggplot(aes(x = income, y = rvote)) +
+  geom_line(aes(y = .value, group = .draw), size = 0.05) +
+  geom_point(data = nes, 
+             position = position_jitter(width = 0.15, height = 0.04), 
+             size = 0.05)
+```
+
+
+# Interpreting logistic regression coefficients and the divide-by-4 rule
+
+## Evaluation at and near the mean of the data
+
+```{r}
+# Pr(Bush) at highest income category
+invlogit(-1.4 + 0.33 * 5)
+
+# Pr(Bush) at mean of income
+invlogit(-1.4 + 0.33 * mean(nes$income))
+
+# or
+invlogit(coef(fit.1)[1] + coef(fit.1)[2] * mean(nes$income))
+
+# difference between two points
+invlogit(coef(fit.1)[1] + coef(fit.1)[2] * 3) - invlogit(coef(fit.1)[1] + coef(fit.1)[2] * 2)
+```
+
+## The divide-by-4 rule
+
+```{r}
+coef(fit.1)[2] / 4
+```
+
+* a difference of 1 in income category corresponds to no more than an 8% positive difference in the probability of supporting Bush
+
+## Interpretation of coefficients as odds ratios
+
+* an odds of 1 is equivalent to a probability of 0.5
+
+
+# Predictions and comparisons
+
+## Point prediction using `predict`
+
+```{r}
+new <- tibble(income = 5)
+point.pred <- predict(fit.1, type = "response", newdata = new)
+point.pred
+```
+
+## Linear predictor with uncertainty using `posterior_linpred`
+
+```{r}
+linpred <- posterior_linpred(fit.1, newdata = new)
+linpred
+```
+
+## Expected outcome with uncertainty using `posterior_epred`
+
+```{r}
+# epred uses the inverse link function
+epred <- posterior_epred(fit.1, newdata = new)
+print(c(mean(epred), sd(epred)))
+```
+
+## Predictive distribution for a new observation using `posterior_predict`
+
+```{r}
+postpred <- posterior_predict(fit.1, newdata = new)
+mean(postpred)
+```
+
+## Prediction given a range of input values
+
+Suppose we want to make predictions for five new people whose incomes take on the values 1 through 5:
+
+```{r}
+new <- data.frame(income = 1:5)
+pred <- predict(fit.1, type = "response", newdata = new)
+linpred <- posterior_linpred(fit.1, newdata = new)
+epred <- posterior_epred(fit.1, newdata = new)
+postpred <- posterior_predict(fit.1, newdata = new)
+
+# compute the posterior probability that Bush was more popular among people 
+# with income level 5 than among people with income level 4
+mean(epred[ , 5] > epred[ , 4])
+
+# now with the 95% posterior distribution
+quantile(epred[ , 5] - epred[ , 4], c(0.025, 0.975))
+```
+
+* we can use postpred to make statements about individual people
+
+* This will compute the posterior simulations of the number of these new survey respondents who support Bush:
+
+```{r}
+total <- apply(postpred, 1, sum)
+
+# probability that at least three support Bush
+mean(total >= 3)
+```
+
+## Logistive regression with just an intercept
+
+* equivalent to just estimating a proportion
+
+```{r}
+y <- rep(c(0, 1), c(40, 10))
+simple <- data.frame(y)
+fit <- stan_glm(y ~ 1, family = binomial(link = "logit"), data = simple)
+print(fit, digits = 2)
+```
+
+## Logistic regression with a single binary predictor
+
+```{r}
+x <- rep(c(0, 1), c(50, 60))
+y <- rep(c(0, 1, 0, 1), c(40, 10, 40, 20))
+simple <- tibble(x, y)
+fit <- stan_glm(y ~ x, family = binomial(link = "logit"), data = simple)
+print(fit, digits = 2)
+
+# compare predictions for x = 0 and x = 1
+new <- tibble(x = c(0, 1))
+epred <- posterior_epred(fit, newdata = new)
+diff <- epred[ , 2] - epred[ , 1]
+print(c(mean(diff), sd(diff)))
+```
+
+
+# Maximum likelihood and Bayesian inference for logistic regression
+
+## Comparing maximum likelihood and Bayesian inference using a sumulation study
+
+```{r}
+library(arm)
+bayes_sim <- function(n, a = 2, b = 0.8) {
+  x <- runif(n, -1, 1)
+  z <- rlogis(n, a + b *x, 1)
+  y <- ifelse(z > 0, 1, 0)
+  fake <- data.frame(x, y, z)
+  glm_fit <- glm(y ~ x, family = binomial(link = "logit"), data = fake)
+  stan_glm_fit <- stan_glm(y ~x, family = binomial(link = "logit"), data = fake,
+                           prior = normal(0.5, 0.5), refresh = 0)
+  display(glm_fit, digits = 1)
+  print(stan_glm_fit, digits = 1)
+}
+
+bayes_sim(10)
+bayes_sim(100)
+bayes_sim(1000)
+```
+
+
+# Building a logistic regression model: wells in Bangladesh
+
+## Logistic regression with just one predictor
+
+```{r}
+wells <- read_csv("Arsenic/data/wells.csv")
+
+fit.1 <- stan_glm(switch ~ dist, family = binomial(link = "logit"), data = wells)
+print(fit.1, digits = 2)
+
+hist(wells$dist)
+
+wells$dist100 <- wells$dist / 100
+
+fit.2 <- stan_glm(switch ~ dist100, family = binomial(link = "logit"), 
+                  data = wells)
+print(fit.2, digits = 2)
+
+library(loo)
+loo.2 <- loo(fit.2)
+```
+
+## Graphing the fitted model
+
+```{r}
+nes %>%
+  expand(income = seq_range(income, n = 5)) %>%
+  add_fitted_draws(fit.1, n = 100) %>%
+  ggplot(aes(x = income, y = rvote)) +
+  geom_line(aes(y = .value, group = .draw), size = 0.05) +
+  geom_point(data = nes, 
+             position = position_jitter(width = 0.15, height = 0.04), 
+             size = 0.05)
+
+
+
+wells %>% 
+  add_fitted_draws(fit.1, n = 100) %>%
+  ggplot(aes(x = dist100, y = switch)) +
+  geom_point(data = wells,
+             position = position_jitter(width = 0.04, height = 0.04), 
+             size = 0.02) +
+  geom_line(aes(y = .value, group = .draw), size = 0.05) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  ggpubr::theme_pubr() +
+  ylab("Pr(Switch Well)") +
+  xlab("Distance (in meters) to Nearest Safe Well")
+
+ggplot(data = wells, aes(x = dist100, group = switch, color = switch)) +
+  geom_density()
+```
+
+## Adding a second input variable
+
+```{r}
+fit.3 <- stan_glm(switch ~ dist100 + arsenic, family = binomial(link = "logit"),
+                  data = wells)
+print(fit.3, digits = 2)
+
+loo.3 <- loo(fit.3)
+
+loo_compare(loo.2, loo.3)
+```
+
+## Graphing the fitted model with two predictors
+
+```{r}
+fig13.10a <- 
+  wells %>% 
+  data_grid(dist100 = seq_range(dist100, n = 5),
+            arsenic = mean(arsenic)) %>%
+  add_fitted_draws(fit.3, n = 100) %>%
+  ggplot(aes(x = dist100, y = switch)) +
+  geom_point(data = wells,
+             position = position_jitter(width = 0.04, height = 0.04), 
+             size = 0.02) +
+  geom_line(aes(y = .value, group = .draw), size = 0.05) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  ggpubr::theme_pubr() +
+  ylab("Pr(Switch Well)") +
+  xlab("Distance (in meters) to Nearest Safe Well")
+
+fig13.10b <- 
+  wells %>% 
+  data_grid(dist100 = mean(dist100),
+            arsenic = seq_range(arsenic, n = 8)) %>%
+  add_fitted_draws(fit.3, n = 100) %>%
+  ggplot(aes(x = arsenic, y = switch)) +
+  geom_point(data = wells,
+             position = position_jitter(width = 0.04, height = 0.04), 
+             size = 0.02) +
+  geom_line(aes(y = .value, group = .draw), size = 0.05) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  ggpubr::theme_pubr() +
+  ylab("Pr(Switch Well)") +
+  xlab("Arsenic Concentration in Well Water")
+
+library(patchwork)
+fig13.10a + fig13.10b
+```
+
