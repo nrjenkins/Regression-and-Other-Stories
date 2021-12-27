@@ -1,0 +1,196 @@
+---
+title: "Chapter 12 - Transformations and regression"
+output: html_notebook
+---
+
+# Centering and standardizing for models with interactions
+
+```{r}
+load("KidIQ/data/kidiq.rda")
+
+library(rstanarm)
+fit.1 <- stan_glm(kid_score ~ mom_hs * mom_iq, data = kidiq)
+print(fit.1)
+```
+
+## Centering by subtracting the mean of the data
+
+```{r}
+library(tidyverse)
+kidiq <- 
+  kidiq %>%
+  mutate(mom_hs_c = mom_hs - mean(mom_hs),
+         mom_iq_c = mom_iq - mean(mom_iq))
+
+fit.2 <- stan_glm(kid_score ~ mom_hs_c * mom_iq_c, data = kidiq)
+print(fit.2)
+```
+
+## Using a conventional centering point
+
+```{r}
+# center using the midpoint of the range for mom_hs and the pop. avg. IQ
+kidiq <- 
+  kidiq %>%
+  mutate(mom_hs_c2 = mom_hs - 0.5,
+         mom_iq_c2 = mom_iq - 100)
+
+fit.3 <- stan_glm(kid_score ~ mom_hs_c2 * mom_iq_c2, data = kidiq)
+print(fit.3)
+```
+
+## Standardizing by subtracting the mean and dividing by 2 standard deviations
+
+```{r}
+library(sjmisc)
+kidiq <- 
+  kidiq %>%
+  mutate(mom_hs_z = (mom_hs - mean(mom_hs)) / (2 * sd(mom_hs)),
+         mom_iq_z = (mom_iq - mean(mom_iq)) / (2 * sd(mom_iq)),
+         mom_hs_z2 = std(mom_hs, robust = "2sd"),
+         mom_iq_z2 = std(mom_iq, robust = "2sd"))
+
+fit.4 <- stan_glm(kid_score ~ mom_hs_z * mom_iq_z, data = kidiq)
+print(fit.4)
+```
+
+* now all coefficients are roughly on the same scale - the average predicted outcome with all inputs at their mean
+
+# Logarithmic transformations
+
+## Earnings and height example
+
+### Direct interpretation of small coefficients on the log scale
+
+```{r}
+earnings <- read_csv("Earnings/data/earnings.csv")
+
+log.fit <- stan_glm(log(earn) ~ height, data = earnings, subset = earn > 0)
+print(log.fit, digits = 2)
+```
+
+* Beta: a difference of 1 inch in height corresponds to an expected difference of 0.06 in log(earnings), so that earnings are multiplied by exp(0.06) = 1.06. So, a difference of 1 in the predictor corresponds to an expected positive difference of about 6%
+
+### Predictive checking
+
+```{r}
+fit.1 <- stan_glm(earn ~ height, data = earnings)
+
+y_rep <- posterior_predict(fit.1)
+y_rep_log <- posterior_predict(log.fit)
+
+library(bayesplot)
+fig.12.5a <- ppc_dens_overlay(earnings$earn, yrep = y_rep[1:100, ])
+
+earning.plot <- 
+  earnings %>%
+  filter(earn > 0)
+
+fig.12.5b <- ppc_dens_overlay(log(earning.plot$earn), yrep = y_rep_log[1:100, ])
+
+library(patchwork)
+fig.12.5a + fig.12.5b
+```
+
+## Building a regression model on the log scale
+
+### Adding another predictor
+
+```{r}
+log.fit.2 <- stan_glm(log(earn) ~ height + male, data = earnings, subset = earn > 0)
+print(log.fit.2, digits = 2)
+```
+
+## Including an interaction
+
+```{r}
+log.fit.3 <- stan_glm(log(earn) ~ height * male, data = earnings, subset = earn > 0)
+print(log.fit.3, digits = 2)
+```
+
+## Linear transformation to make coefficients more interpretable
+
+```{r}
+earnings <- 
+  earnings %>%
+  mutate(height_z = std(height, robust = "sd"))
+
+log.fit.4 <- stan_glm(log(earn) ~ height_z * male, data = earnings, subset = earn > 0)
+print(log.fit.4, digits = 2)
+```
+
+## Log-log model: transforming the input and outcome variables
+
+```{r}
+log.model.5 <- stan_glm(log(earn) ~ log(height) + male, data = earnings, 
+                        subset = earn > 0)
+print(log.model.5, digits = 2)
+```
+
+# Building and comparing regression models for prediction
+
+## Example: predicting the yields of mesquite bushes
+
+```{r}
+mesquite <- read.table("Mesquite/data/mesquite.dat", header = TRUE)
+
+fit.1 <- stan_glm(weight ~ diam1 + diam2 + canopy_height + total_height +
+                    density + group,
+                  data = mesquite)
+print(fit.1, digits = 2)
+
+library(loo)
+loo.1 <- loo(fit.1)
+loo.1
+
+kfold.1 <- kfold(fit.1, K = 10)
+kfold.1
+
+fit.2 <- stan_glm(log(weight) ~ log(diam1) + log(diam2) + log(canopy_height)
+                  + log(total_height) + log(density) + group,
+                  data = mesquite)
+print(fit.2, digits = 2)
+
+loo.2 <- loo(fit.2)
+loo.2
+
+kfold.2 <- kfold(fit.2, K = 10)
+kfold.2
+```
+
+Check model fit:
+
+```{r}
+y_rep_1 <- posterior_predict(fit.1)
+ppc_dens_overlay(mesquite$weight, y_rep_1[1:100, ])
+
+y_rep_2 <- posterior_predict(fit.2)
+ppc_dens_overlay(log(mesquite$weight), y_rep_2[1:100, ])
+
+
+fit.3 <- stan_glm(weight ~ diam1 + diam2 + canopy_height + total_height +
+                    density + group,
+                  family = Gamma(link = "log"),
+                  data = mesquite)
+print(fit.3, digits = 2)
+
+kfold.3 <- kfold(fit.3, K = 10)
+kfold.3
+```
+
+## Constructing a simpler model
+
+```{r}
+mesquite <- 
+  mesquite %>%
+  mutate(canopy_volume = diam1 * diam2 * canopy_height)
+
+fit.1 <- stan_glm(log(weight) ~ log(canopy_volume),
+                  data = mesquite)
+print(fit.1, digits = 2)
+
+loo.3 <- loo(fit.1)
+
+loo_compare(loo.2, loo.3)
+```
+
