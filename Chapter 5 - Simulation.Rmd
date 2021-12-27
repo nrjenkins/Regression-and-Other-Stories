@@ -1,0 +1,170 @@
+---
+title: "Chapter 5 - Simulation"
+output: html_notebook
+---
+
+# Simulation of discrete probability models
+
+How many girls in 400 births?
+
+```{r}
+n_girls <- rbinom(n = 1, size = 400, prob = 0.488)
+n_girls
+```
+
+To look at the distribution of what could happen, we simulate rhe process 1000 times:
+
+```{r}
+n_sims <- 1000
+n_girls <- rep(NA, n_sims)
+for (s in 1:n_sims) {
+  n_girls[s] <- rbinom(n = 1, size = 400, prob = 0.488)
+}
+hist(n_girls)
+
+# or
+n_girls <- rbinom(n = 1000, size = 400, prob = 0.488)
+hist(n_girls)
+```
+
+## Accounting for twins
+
+```{r}
+birth_type <- sample(x = c("fraternal twin", "identical twin", "single birth"),
+                     size = 400, replace = TRUE, 
+                     prob = c(1/125, 1/300, 1 - 1/125 - 1/300))
+girls <- rep(NA, 400)
+for (i in 1:400) {
+  if (birth_type[i] == "single birth") {
+    girls[i] <- rbinom(1, 1, 0.488)
+  } else if (birth_type[i] == "identical twin") {
+    girls[i] <- 2 * rbinom(1, 1, 0.495)
+  } else if (birth_type[i] == "fraternal twin") {
+    girls[i] <- rbinom(1, 2, 0.495)
+  }
+}
+n_girls <- sum(girls)
+
+# or
+girls <- ifelse(birth_type == "single birth", rbinom(400, 1, 0.488),
+                ifelse(birth_type == "identical twin", 2 * rbinom(400, 1, 0.495),
+                       rbinom(400, 2, 0.495)))
+
+# now simulate the distribution of the number of girls in 400 births
+n_sims <- 1000
+n_girls <- rep(NA, n_sims)
+for (s in 1:n_sims) {
+  birth_type <- sample(x = c("fraternal twin", "identical twin", "single birth"),
+                     size = 400, replace = TRUE, 
+                     prob = c(1/125, 1/300, 1 - 1/125 - 1/300))
+  girls <- rep(NA, 400)
+  for (i in 1:400) {
+    if (birth_type[i] == "single birth") {
+    girls[i] <- rbinom(1, 1, 0.488)
+  } else if (birth_type[i] == "identical twin") {
+    girls[i] <- 2 * rbinom(1, 1, 0.495)
+  } else if (birth_type[i] == "fraternal twin") {
+    girls[i] <- rbinom(1, 2, 0.495)
+  }
+  }
+  n_girls[s] <- sum(girls)
+}
+hist(n_girls)
+```
+
+# Simulation of continuous and mixed discrete/continuous models
+
+```{r}
+n_sims <- 1000
+y1 <- rnorm(n_sims, mean = 3, sd = 0.5)
+y2 <- exp(y1)
+y3 <- rbinom(n_sims, size = 20, prob = 0.6)
+y4 <- rpois(n_sims, lambda = 5)
+
+library(tidyverse)
+p1 <- ggplot() + geom_histogram(aes(x = y1))
+p2 <- ggplot() + geom_histogram(aes(x = y2)) 
+p3 <- ggplot() + geom_histogram(aes(x = y3)) 
+p4 <- ggplot() + geom_histogram(aes(x = y4)) 
+
+library(patchwork)
+(p1 + p2) / (p3 + p4)
+```
+
+We can also incorporate continous probability distribution with the sorts of simulations discussed in the previous section. Here is the height of one randomly chosen adult:
+
+```{r}
+male <- rbinom(1, 1, 0.48)
+height <- ifelse(male == 1, rnorm(1, 69.1, 2.9), rnorm(1, 63.7, 2.7))
+height
+```
+
+Now let's choose 10 adults at random and find their average height:
+
+```{r}
+N <- 10
+male <- rbinom(1, 1, 0.48)
+height <- ifelse(male == 1, rnorm(1, 69.1, 2.9), rnorm(1, 63.7, 2.7))
+avg_height <- mean(height)
+avg_height
+
+# simulate the distribution of their heights
+n_sims <- 1000
+avg_height <- rep(NA, n_sims)
+for (s in 1:n_sims) {
+  N <- 10
+  male <- rbinom(N, 1, 0.48)
+  height <- ifelse(male == 1, rnorm(1, 69.1, 2.9), rnorm(1, 63.7, 2.7))
+  avg_height[s] <- mean(height)
+}
+hist(avg_height)
+```
+
+## Simulation in R using custom-made functions
+
+```{r}
+height_sim <- function(N) {
+  male <- rbinom(N, 1, 0.48)
+  height <- ifelse(male == 1, rnorm(1, 69.1, 2.9), rnorm(1, 63.7, 2.7))
+  mean(height)
+}
+
+# simulate
+avg_height <- replicate(n = 1000, height_sim(N = 10))
+hist(avg_height)
+```
+
+# Bootstrapping to simulate a sampling distribution
+
+Bootstrap sampling is done with replacement
+
+```{r}
+earnings <- read_csv("Earnings/data/earnings.csv")
+earn <- earnings$earn
+male <- earnings$male
+ratio <- median(earn[male == 0]) / median(earn[male == 1])
+ratio
+```
+
+This shows that the median earnings of women are 60% that of men. But what about uncertianty? One approach is to look at the variation in 100 random bootstrap samples from the data, which can be taken as an approximation to the sampling distribution. 
+
+```{r}
+n <- nrow(earnings)
+boot <- sample(x = n, replace = TRUE)
+earn_boot <- earn[boot]
+male_boot <- male[boot]
+ratio_boot <- median(earn_boot[male_boot == 0]) / median(earn_boot[male_boot == 1])
+
+boot_ratio <- function(data) {  
+  n <- nrow(data)  
+  boot <- sample(n, replace=TRUE)  
+  earn_boot <- data$earn[boot]  
+  male_boot <- data$male[boot]  
+  median(earn_boot[male_boot==0])/ median(earn_boot[male_boot==1])  
+}
+
+n_sims <- 1000
+output <- replicate(n_sims, boot_ratio(data = earnings))
+hist(output)
+```
+
